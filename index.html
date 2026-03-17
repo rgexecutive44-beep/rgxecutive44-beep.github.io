@@ -50,7 +50,7 @@
     #accueil { min-height: 100vh; background: var(--navy); display: flex; align-items: center; position: relative; overflow: hidden; }
     #accueil::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 75% 40%, rgba(74,144,196,.18) 0%, transparent 65%), radial-gradient(ellipse 40% 60% at 20% 70%, rgba(240,112,48,.08) 0%, transparent 60%); }
     .hero-grid { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 60px 60px; }
-    .hero-lighthouse { position: absolute; right: 4%; bottom: 0; width: min(300px, 32vw); opacity: .12; pointer-events: none; object-fit: contain; filter: brightness(1.5) invert(1); z-index: 1; }
+    .hero-lighthouse { position: absolute; right: 4%; bottom: 50%; transform: translateY(50%); width: min(380px, 38vw); opacity: .07; pointer-events: none; object-fit: contain; filter: brightness(10); z-index: 1; }
     .hero-inner { position: relative; z-index: 3; width: 90%; max-width: 1200px; margin: 0 auto; padding: 10rem 0 6rem; }
     .hero-tag { display: inline-block; font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--tang); border: 1px solid var(--tang); padding: .3rem .9rem; border-radius: 2px; margin-bottom: 1.8rem; animation: fadeUp .8s ease both; }
     .hero-title { color: #fff !important; max-width: 760px; animation: fadeUp .8s .15s ease both; }
@@ -110,7 +110,8 @@
     .about-card::before { content: ''; position: absolute; top: 0; right: 0; width: 90px; height: 90px; background: var(--tang); opacity: .14; border-radius: 0 0 0 100%; }
     .about-card-logo { margin-bottom: 1.6rem; }
     .about-card-photo { margin-bottom: 1.6rem; }
-    .photo-placeholder { width: 100%; height: 120px; background: rgba(255,255,255,.08); border: 2px dashed rgba(255,255,255,.25); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.45); font-size: .82rem; letter-spacing: .06em; }
+    .photo-placeholder { display: none; }
+    .about-photo { width: 100%; height: 280px; object-fit: cover; object-position: top center; border-radius: 4px; display: block; }
     .about-card-logo img { height: 52px; width: auto; }
     .about-card-name { font-family: 'Cormorant Garamond', serif; font-size: 1.85rem; font-weight: 700; margin-bottom: .2rem; color: #fff !important; }
     .about-card-name span { color: var(--tang); }
@@ -228,24 +229,15 @@
 <!-- ── Navigation ── -->
 <nav id="navbar">
   <a href="#accueil" class="nav-logo">
-    <img src="logo-blanc.jpg" alt="RG Cap Entreprises" id="navLogoImg" />
-    <div class="nav-logo-mark">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="10" y="2" width="4" height="5" rx="1" fill="white"/>
-        <rect x="8" y="7" width="8" height="8" rx="1" fill="white" opacity=".9"/>
-        <polygon points="7,15 17,15 19,22 5,22" fill="white" opacity=".75"/>
-        <rect x="4" y="21" width="16" height="2" rx="1" fill="white" opacity=".5"/>
-        <line x1="12" y1="2" x2="5" y2="0.5" stroke="white" stroke-width="1.2" opacity=".7"/>
-        <line x1="12" y1="2" x2="19" y2="0.5" stroke="white" stroke-width="1.2" opacity=".7"/>
-      </svg>
-    </div>
+    <img src="1000069584.png" alt="RG Cap Entreprises" id="navLogoImg" />
+    <div class="nav-logo-mark" style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:.02em;">RG</div>
     <div class="nav-logo-text" id="navLogoText"><span>RG</span> Cap Entreprises</div>
   </a>
   <ul class="nav-links">
     <li><a href="#accueil">Accueil</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#apropos">À propos</a></li>
-    <li><a href="#tarifs">Tarifs</a></li>
+    <li><a href="#tarifs">Formules</a></li>
     <li><a href="#partenaires">Relation expert-comptable</a></li>
     <li><a href="#contact" class="nav-cta">Me contacter</a></li>
   </ul>
@@ -258,7 +250,7 @@
   <a href="#accueil"     onclick="toggleMenu()">Accueil</a>
   <a href="#services"    onclick="toggleMenu()">Services</a>
   <a href="#apropos"     onclick="toggleMenu()">À propos</a>
-  <a href="#tarifs"      onclick="toggleMenu()">Tarifs</a>
+  <a href="#tarifs"      onclick="toggleMenu()">Formules</a>
   <a href="#partenaires" onclick="toggleMenu()">Partenaires</a>
   <a href="#contact"     onclick="toggleMenu()">Contact</a>
 </div>
@@ -266,7 +258,7 @@
 <!-- ── Hero ── -->
 <section id="accueil">
   <div class="hero-grid"></div>
-  <img src="phare.jpg" class="hero-lighthouse" alt="" />
+  <img src="1000069584.png" class="hero-lighthouse" alt="" />
   <div class="hero-inner">
     <div class="hero-tag">Support opérationnel aux entreprises</div>
     <h1 class="hero-title">Libérez-vous<br/>de la corvée <em>administrative.</em></h1>
@@ -348,7 +340,7 @@
     <div class="about-grid">
       <div class="about-visual reveal">
         <div class="about-card">
-          <div class="about-card-photo"><div class="photo-placeholder">📷 Photo de Romain</div></div>
+          <div class="about-card-photo"><img src="photo-romain.jpg" alt="Romain Guyon" class="about-photo" /></div>
           <div class="about-card-name">Romain <span>Guyon</span></div>
           <div class="about-card-role">Fondateur · RG Cap Entreprises</div>
           <div class="about-card-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Banque &amp; Finance</div>
@@ -385,7 +377,7 @@
     <div class="tarifs-grid">
       <div class="tarif-card reveal"><div class="tarif-label">Formule Starter</div><div class="tarif-name">½ journée / mois</div><div class="tarif-desc">Idéal pour un besoin ponctuel ou un accompagnement léger sur une tâche récurrente.</div></div>
       <div class="tarif-card reveal"><div class="tarif-label">Formule Essentiel</div><div class="tarif-name">1 journée / mois</div><div class="tarif-desc">Pour déléguer régulièrement sans alourdir votre structure ni votre budget.</div></div>
-      <div class="tarif-card featured reveal"><div class="tarif-label">Formule Confort</div><div class="tarif-name">2 journées / mois</div><div class="tarif-desc">Le juste équilibre pour être réellement soulagé.e au quotidien.</div></div>
+      <div class="tarif-card reveal"><div class="tarif-label">Formule Confort</div><div class="tarif-name">2 journées / mois</div><div class="tarif-desc">Le juste équilibre pour être réellement soulagé.e au quotidien.</div></div>
       <div class="tarif-card reveal"><div class="tarif-label">Formule Cap Premium</div><div class="tarif-name">4 journées / mois</div><div class="tarif-desc">Un accompagnement plus régulier pour les entreprises qui en ressentent le besoin.</div></div>
     </div>
     <div class="tarifs-sur-mesure reveal">
@@ -480,7 +472,7 @@
   <div class="footer-inner">
     <div>
       <div class="footer-logo">
-        <img src="logo-blanc.jpg" alt="RG Cap Entreprises" id="footerLogo" />
+        <img src="1000069584.png" alt="RG Cap Entreprises" id="footerLogo" />
         <div class="footer-logo-text" id="footerLogoText" style="display:none;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:.03em;"><span style="color:#f07030">RG</span> Cap Entreprises</div>
       </div>
       <div class="footer-slogan">— Cap sur l'essentiel —</div>
