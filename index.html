@@ -43,8 +43,7 @@
     .nav-links a:hover { color: var(--tang); }
     .nav-cta { background: var(--tang); color: #fff !important; padding: .48rem 1.2rem; border-radius: 2px; }
     .nav-cta:hover { background: var(--tang-light) !important; }
-    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-    .burger span { display: block; width: 24px; height: 2px; background: #fff; }
+
 
     /* ── Hero ── */
     #accueil { min-height: 100vh; background: var(--navy); display: flex; align-items: center; position: relative; overflow: hidden; }
@@ -63,7 +62,6 @@
       .about-values { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .nav-links { display: none !important; }
-      .burger { display: flex !important; }
       .processus-steps { grid-template-columns: 1fr; }
       .douleurs-grid { grid-template-columns: 1fr; }
     }
@@ -233,18 +231,17 @@
       .about-values { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .nav-links { display: none !important; }
-      .burger { display: flex !important; }
       .processus-steps { grid-template-columns: 1fr; }
       .douleurs-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) { section { padding: 4rem 5%; } .tarifs-grid { grid-template-columns: 1fr; } .contact-form { padding: 1.6rem 1.2rem; } }
 
-    /* ── Mobile nav ── */
-    .mobile-nav { display: none !important; position: fixed; inset: 0; z-index: 200; background: var(--navy); flex-direction: column; align-items: center; justify-content: center; gap: 1.8rem; }
-    .mobile-nav.open { display: flex !important; }
-    .mobile-nav a { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; color: #fff; text-decoration: none; transition: color .2s; }
-    .mobile-nav a:hover { color: var(--tang); }
-    .mobile-close { position: absolute; top: 1.4rem; right: 1.7rem; background: none; border: none; cursor: pointer; color: #fff; font-size: 1.7rem; line-height: 1; }
+    
+
+    @media (max-width: 900px) {
+      #fabBtn { display: flex !important; }
+      .nav-links { display: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -263,19 +260,11 @@
     <li><a href="#partenaires">Lien avec expert-comptable</a></li>
     <li><a href="#contact" class="nav-cta">Me contacter</a></li>
   </ul>
-  <div class="burger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+
 </nav>
 
 <!-- Mobile nav -->
-<div class="mobile-nav" id="mobileNav">
-  <button class="mobile-close" onclick="toggleMenu()">✕</button>
-  <a href="#accueil"     onclick="toggleMenu()">Accueil</a>
-  <a href="#services"    onclick="toggleMenu()">Services</a>
-  <a href="#apropos"     onclick="toggleMenu()">Qui suis-je ?</a>
-  <a href="#tarifs"      onclick="toggleMenu()">Formules</a>
-  <a href="#partenaires" onclick="toggleMenu()">Partenaires</a>
-  <a href="#contact"     onclick="toggleMenu()">Contact</a>
-</div>
+
 
 <!-- ── Hero ── -->
 <section id="accueil">
@@ -511,21 +500,81 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
-  // Menu burger
-  var burgerEl = document.querySelector('.burger');
-  var mobileNavEl = document.getElementById('mobileNav');
-  if (burgerEl && mobileNavEl) {
-    burgerEl.addEventListener('click', function() {
-      mobileNavEl.classList.toggle('open');
-    });
+<!-- ── Menu mobile flottant ── -->
+<div id="fabMenu" style="display:none;position:fixed;bottom:80px;right:1.2rem;z-index:300;background:#0d1f3c;border-radius:8px;padding:.8rem 0;box-shadow:0 8px 32px rgba(0,0,0,.5);min-width:200px;border:1px solid rgba(255,255,255,.1);">
+  <a href="#accueil"     onclick="closeFab()" style="display:block;padding:.75rem 1.4rem;color:#fff;text-decoration:none;font-family:DM Sans,sans-serif;font-size:.9rem;border-bottom:1px solid rgba(255,255,255,.07);">Accueil</a>
+  <a href="#services"    onclick="closeFab()" style="display:block;padding:.75rem 1.4rem;color:#fff;text-decoration:none;font-family:DM Sans,sans-serif;font-size:.9rem;border-bottom:1px solid rgba(255,255,255,.07);">Services</a>
+  <a href="#apropos"     onclick="closeFab()" style="display:block;padding:.75rem 1.4rem;color:#fff;text-decoration:none;font-family:DM Sans,sans-serif;font-size:.9rem;border-bottom:1px solid rgba(255,255,255,.07);">Qui suis-je ?</a>
+  <a href="#tarifs"      onclick="closeFab()" style="display:block;padding:.75rem 1.4rem;color:#fff;text-decoration:none;font-family:DM Sans,sans-serif;font-size:.9rem;border-bottom:1px solid rgba(255,255,255,.07);">Formules</a>
+  <a href="#partenaires" onclick="closeFab()" style="display:block;padding:.75rem 1.4rem;color:#fff;text-decoration:none;font-family:DM Sans,sans-serif;font-size:.9rem;border-bottom:1px solid rgba(255,255,255,.07);">Lien expert-comptable</a>
+  <a href="#contact"     onclick="closeFab()" style="display:block;padding:.75rem 1.4rem;color:#f07030;text-decoration:none;font-family:DM Sans,sans-serif;font-size:.9rem;font-weight:500;">Me contacter</a>
+</div>
+<button id="fabBtn" onclick="toggleFab()" style="display:none;position:fixed;bottom:1.2rem;right:1.2rem;z-index:301;width:52px;height:52px;border-radius:50%;background:#f07030;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(240,112,48,.5);align-items:center;justify-content:center;flex-direction:column;gap:5px;">
+  <span style="display:block;width:22px;height:2px;background:#fff;border-radius:2px;pointer-events:none;"></span>
+  <span style="display:block;width:22px;height:2px;background:#fff;border-radius:2px;pointer-events:none;"></span>
+  <span style="display:block;width:22px;height:2px;background:#fff;border-radius:2px;pointer-events:none;"></span>
+</button>
+
+<style>
+@media (max-width: 900px) {
+  #fabBtn { display: flex !important; }
+  .nav-links { display: none !important; }
+}
+</style>
+
+<script>
+  // Navbar scroll
+  var navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function() {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // FAB menu
+  function toggleFab() {
+    var m = document.getElementById('fabMenu');
+    m.style.display = m.style.display === 'block' ? 'none' : 'block';
   }
-  window.toggleMenu = function() {
-    if (mobileNavEl) mobileNavEl.classList.toggle('open');
-  };
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(r =
+  function closeFab() {
+    document.getElementById('fabMenu').style.display = 'none';
+  }
+  document.addEventListener('click', function(e) {
+    var btn = document.getElementById('fabBtn');
+    var menu = document.getElementById('fabMenu');
+    if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
+      menu.style.display = 'none';
+    }
+  });
+
+  // Reveal on scroll
+  if (window.location.protocol !== 'file:') {
+    document.querySelectorAll('.reveal').forEach(function(r) {
+      r.style.opacity = '0';
+      r.style.transform = 'translateY(26px)';
+    });
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '';
+          e.target.style.transform = '';
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(function(r) { obs.observe(r); });
+  }
+
+  // Formulaire
+  function submitForm(e) {
+    e.preventDefault();
+    var btn = e.target.querySelector('.form-submit');
+    btn.textContent = 'Envoi en cours…';
+    btn.disabled = true;
+    setTimeout(function() {
+      document.getElementById('formSuccess').style.display = 'block';
+      btn.textContent = 'Message envoyé ✓';
+    }, 1200);
+  }
+</script>
+</body>
+</html>
