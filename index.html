@@ -33,17 +33,17 @@
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 6%; background: var(--navy); transition: background .35s, box-shadow .35s; }
     nav { box-shadow: 0 2px 24px rgba(0,0,0,.2); }
     .nav-logo { display: flex; align-items: center; gap: .7rem; text-decoration: none; }
-    .nav-logo img { height: 46px; width: auto; display: none; }
-    .nav-logo-mark { width: 42px; height: 42px; background: var(--tang); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .nav-logo-mark svg { width: 22px; height: 22px; }
-    .nav-logo-text { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.1rem; color: #fff; letter-spacing: .03em; line-height: 1.2; }
-    .nav-logo-text span { color: var(--tang); }
+    .nav-logo-img { height: 48px; width: auto; max-width: 200px; display: block; object-fit: contain; mix-blend-mode: screen; }
+    .nav-logo-img[src=""] { display: none; }
+    .nav-logo-fallback { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.1rem; color: #fff; letter-spacing: .03em; display: none; }
+    .nav-logo-fallback span { color: var(--tang); }
+
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { color: rgba(255,255,255,.85); text-decoration: none; font-size: .82rem; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; transition: color .2s; }
     .nav-links a:hover { color: var(--tang); }
     .nav-cta { background: var(--tang); color: #fff !important; padding: .48rem 1.2rem; border-radius: 2px; }
     .nav-cta:hover { background: var(--tang-light) !important; }
-    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
     .burger span { display: block; width: 24px; height: 2px; background: #fff; }
 
     /* ── Hero ── */
@@ -51,7 +51,7 @@
     #accueil::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 75% 40%, rgba(74,144,196,.18) 0%, transparent 65%), radial-gradient(ellipse 40% 60% at 20% 70%, rgba(240,112,48,.08) 0%, transparent 60%); }
     .hero-grid { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 60px 60px; }
     .hero-lighthouse { position: absolute; right: 4%; bottom: 50%; transform: translateY(50%); width: min(380px, 38vw); opacity: .07; pointer-events: none; object-fit: contain; filter: brightness(10); z-index: 1; }
-    .hero-inner { position: relative; z-index: 3; width: 90%; max-width: 1200px; margin: 0 auto; padding: 10rem 0 6rem; }
+    .hero-inner { position: relative; z-index: 3; width: 90%; max-width: 1200px; margin: 0 auto; padding: 8rem 0 6rem; }
     .hero-tag { display: inline-block; font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--tang); border: 1px solid var(--tang); padding: .3rem .9rem; border-radius: 2px; margin-bottom: 1.8rem; animation: fadeUp .8s ease both; }
     .hero-title { color: #fff !important; max-width: 760px; animation: fadeUp .8s .15s ease both; }
     .hero-title em { font-style: normal; color: var(--tang); }
@@ -189,7 +189,7 @@
     footer { background: var(--navy); color: rgba(255,255,255,.4); padding: 2.2rem 6%; }
     .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-logo { display: flex; align-items: center; gap: .5rem; }
-    .footer-logo img { height: 38px; width: auto; }
+    .footer-logo img { height: 38px; width: auto; mix-blend-mode: screen; }
     .footer-logo img:not([src]), .footer-logo img[src=""] { display: none; }
     .footer-slogan { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; margin-top: .3rem; color: rgba(255,255,255,.28); }
     .footer-legal { font-size: .71rem; }
@@ -209,16 +209,16 @@
       .promesse-grid { grid-template-columns: 1fr; }
       .about-values { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      .burger { display: flex; }
+      .nav-links { display: none !important; }
+      .burger { display: flex !important; }
       .processus-steps { grid-template-columns: 1fr; }
       .douleurs-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) { section { padding: 4rem 5%; } .tarifs-grid { grid-template-columns: 1fr; } .contact-form { padding: 1.6rem 1.2rem; } }
 
     /* ── Mobile nav ── */
-    .mobile-nav { display: none; position: fixed; inset: 0; z-index: 200; background: var(--navy); flex-direction: column; align-items: center; justify-content: center; gap: 1.8rem; }
-    .mobile-nav.open { display: flex; }
+    .mobile-nav { display: none !important; position: fixed; inset: 0; z-index: 200; background: var(--navy); flex-direction: column; align-items: center; justify-content: center; gap: 1.8rem; }
+    .mobile-nav.open { display: flex !important; }
     .mobile-nav a { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; color: #fff; text-decoration: none; transition: color .2s; }
     .mobile-nav a:hover { color: var(--tang); }
     .mobile-close { position: absolute; top: 1.4rem; right: 1.7rem; background: none; border: none; cursor: pointer; color: #fff; font-size: 1.7rem; line-height: 1; }
@@ -229,9 +229,8 @@
 <!-- ── Navigation ── -->
 <nav id="navbar">
   <a href="#accueil" class="nav-logo">
-    <img src="1000069584.png" alt="RG Cap Entreprises" id="navLogoImg" />
-    <div class="nav-logo-mark" style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:.02em;">RG</div>
-    <div class="nav-logo-text" id="navLogoText"><span>RG</span> Cap Entreprises</div>
+    <img src="1000069584.png" alt="RG Cap Entreprises" class="nav-logo-img" />
+    <div class="nav-logo-fallback"><span>RG</span> Cap Entreprises</div>
   </a>
   <ul class="nav-links">
     <li><a href="#accueil">Accueil</a></li>
@@ -258,7 +257,7 @@
 <!-- ── Hero ── -->
 <section id="accueil">
   <div class="hero-grid"></div>
-  <img src="1000069584.png" class="hero-lighthouse" alt="" />
+
   <div class="hero-inner">
     <div class="hero-tag">Support opérationnel aux entreprises</div>
     <h1 class="hero-title">Libérez-vous<br/>de la corvée <em>administrative.</em></h1>
@@ -472,8 +471,8 @@
   <div class="footer-inner">
     <div>
       <div class="footer-logo">
-        <img src="1000069584.png" alt="RG Cap Entreprises" id="footerLogo" />
-        <div class="footer-logo-text" id="footerLogoText" style="display:none;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:.03em;"><span style="color:#f07030">RG</span> Cap Entreprises</div>
+        <img src="1000069584.png" alt="RG Cap Entreprises" class="nav-logo-img" />
+        <div class="nav-logo-fallback"><span>RG</span> Cap Entreprises</div>
       </div>
       <div class="footer-slogan">— Cap sur l'essentiel —</div>
     </div>
@@ -488,7 +487,7 @@
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
-  function toggleMenu() { document.getElementById('mobileNav').classList.toggle('open'); }
+  window.toggleMenu = function() { var mn = document.getElementById('mobileNav'); if(mn) mn.classList.toggle('open'); };
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, { threshold: 0.1 });
