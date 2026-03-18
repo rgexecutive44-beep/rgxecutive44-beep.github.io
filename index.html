@@ -55,7 +55,18 @@
     .hero-content { display: flex; flex-direction: column; }
     .hero-visual { display: flex; align-items: center; justify-content: center; position: relative; }
     .hero-logo-large { width: min(480px, 90%); opacity: 1; filter: none; }
-    @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; } .hero-visual { display: none; } }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr !important; }
+      .hero-visual { display: none !important; }
+      .about-grid, .contact-grid, .partenaires-grid { grid-template-columns: 1fr; gap: 2.2rem; }
+      .promesse-grid { grid-template-columns: 1fr; }
+      .about-values { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none !important; }
+      .burger { display: flex !important; }
+      .processus-steps { grid-template-columns: 1fr; }
+      .douleurs-grid { grid-template-columns: 1fr; }
+    }
     .hero-tag { display: inline-block; font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--tang); border: 1px solid var(--tang); padding: .3rem .9rem; border-radius: 2px; margin-bottom: 1.8rem; animation: fadeUp .8s ease both; }
     .hero-title { color: #fff !important; max-width: 100%; animation: fadeUp .8s .15s ease both; }
     .hero-title em { font-style: normal; color: var(--tang); }
