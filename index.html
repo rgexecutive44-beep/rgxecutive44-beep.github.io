@@ -24,16 +24,16 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'DM Sans', sans-serif; font-weight: 300; color: var(--text); background: var(--white); overflow-x: hidden; }
     h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 700; line-height: 1.1; color: var(--tang); }
-    h1 { font-size: clamp(2.6rem, 5.5vw, 5rem); }
-    h2 { font-size: clamp(1.9rem, 3.5vw, 3rem); }
+    h1 { font-size: clamp(2.6rem, 5.5vw, 7rem); }
+    h2 { font-size: clamp(1.9rem, 3.5vw, 4rem); }
     h3 { font-size: 1.35rem; }
     p  { line-height: 1.75; }
 
     /* ── Navigation ── */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 6%; background: var(--navy); transition: background .35s, box-shadow .35s; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem max(6%, calc((100vw - 1400px) / 2)); background: var(--navy); transition: background .35s, box-shadow .35s; }
     nav { box-shadow: 0 2px 24px rgba(0,0,0,.2); }
     .nav-logo { display: flex; align-items: center; gap: .7rem; text-decoration: none; }
-    .nav-logo-img { height: 64px; width: auto; max-width: 240px; display: block; object-fit: contain; }
+    .nav-logo-img { height: clamp(52px, 5vw, 80px); width: auto; max-width: 280px; display: block; object-fit: contain; }
     .nav-logo-img[src=""] { display: none; }
     .nav-logo-fallback { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.1rem; color: #fff; letter-spacing: .03em; display: none; }
     .nav-logo-fallback span { color: var(--tang); }
@@ -51,12 +51,16 @@
     #accueil::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 75% 40%, rgba(74,144,196,.18) 0%, transparent 65%), radial-gradient(ellipse 40% 60% at 20% 70%, rgba(240,112,48,.08) 0%, transparent 60%); }
     .hero-grid { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 60px 60px; }
     .hero-lighthouse { position: absolute; right: 4%; bottom: 50%; transform: translateY(50%); width: min(380px, 38vw); opacity: .07; pointer-events: none; object-fit: contain; filter: brightness(10); z-index: 1; }
-    .hero-inner { position: relative; z-index: 3; width: 90%; max-width: 1200px; margin: 0 auto; padding: 8rem 0 6rem; }
+    .hero-inner { position: relative; z-index: 3; width: 92%; max-width: 1600px; margin: 0 auto; padding: 10rem 0 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hero-content { display: flex; flex-direction: column; }
+    .hero-visual { display: flex; align-items: center; justify-content: center; position: relative; }
+    .hero-logo-large { width: min(420px, 90%); opacity: .9; filter: brightness(0) invert(1); }
+    @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; } .hero-visual { display: none; } }
     .hero-tag { display: inline-block; font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--tang); border: 1px solid var(--tang); padding: .3rem .9rem; border-radius: 2px; margin-bottom: 1.8rem; animation: fadeUp .8s ease both; }
-    .hero-title { color: #fff !important; max-width: 760px; animation: fadeUp .8s .15s ease both; }
+    .hero-title { color: #fff !important; max-width: 100%; animation: fadeUp .8s .15s ease both; }
     .hero-title em { font-style: normal; color: var(--tang); }
     .hero-slogan { margin-top: 1.4rem; font-size: 1.05rem; color: rgba(255,255,255,.45); letter-spacing: .22em; text-transform: uppercase; font-weight: 400; animation: fadeUp .8s .3s ease both; }
-    .hero-desc { margin-top: 1.6rem; max-width: 540px; color: rgba(255,255,255,.7); font-size: .98rem; animation: fadeUp .8s .45s ease both; }
+    .hero-desc { margin-top: 1.6rem; max-width: 100%; color: rgba(255,255,255,.7); font-size: .98rem; animation: fadeUp .8s .45s ease both; }
     .hero-actions { margin-top: 2.8rem; display: flex; gap: 1.1rem; flex-wrap: wrap; animation: fadeUp .8s .6s ease both; }
     .btn-primary { display: inline-block; background: var(--tang); color: #fff; text-decoration: none; padding: .82rem 1.9rem; border-radius: 2px; font-weight: 500; font-size: .9rem; letter-spacing: .04em; transition: background .2s, transform .2s; }
     .btn-primary:hover { background: var(--tang-light); transform: translateY(-2px); }
@@ -66,8 +70,8 @@
     .scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, rgba(255,255,255,.3), transparent); animation: scrollPulse 2s ease infinite; }
 
     /* ── Sections communes ── */
-    section { padding: 5.5rem 6%; }
-    .section-inner { max-width: 1200px; margin: 0 auto; }
+    section { padding: 5.5rem max(6%, calc((100vw - 1400px) / 2 + 2%)); }
+    .section-inner { max-width: min(1600px, 92vw); margin: 0 auto; }
     .section-tag { font-size: .82rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--tang); margin-bottom: .9rem; }
     .section-title { color: var(--tang) !important; margin-bottom: 1.3rem; font-weight: 700; }
     .section-lead { max-width: 620px; color: var(--muted); font-size: .98rem; }
@@ -186,10 +190,10 @@
     .form-success { display: none; background: rgba(13,31,60,.05); border: 1px solid rgba(13,31,60,.1); border-left: 4px solid var(--tang); padding: 1rem 1.3rem; border-radius: 2px; color: var(--navy); font-size: .86rem; margin-top: .9rem; }
 
     /* ── Footer ── */
-    footer { background: var(--navy); color: rgba(255,255,255,.4); padding: 2.2rem 6%; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    footer { background: var(--navy); color: rgba(255,255,255,.4); padding: 2.2rem max(6%, calc((100vw - 1400px) / 2 + 2%)); }
+    .footer-inner { max-width: min(1400px, 90vw); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-logo { display: flex; align-items: center; gap: .5rem; }
-    .footer-logo img { height: 54px; width: auto; }
+    .footer-logo img { height: clamp(50px, 5vw, 72px); width: auto; }
     .footer-logo img:not([src]), .footer-logo img[src=""] { display: none; }
     .footer-slogan { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; margin-top: .3rem; color: rgba(255,255,255,.28); }
     .footer-legal { font-size: .71rem; }
@@ -203,6 +207,14 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── Responsive ── */
+    @media (min-width: 1600px) {
+      nav { padding: 1.2rem calc((100vw - 1400px) / 2); }
+      section { padding: 6rem calc((100vw - 1400px) / 2); }
+      footer { padding: 2.5rem calc((100vw - 1400px) / 2); }
+      .nav-links a { font-size: .9rem; }
+      .hero-tag { font-size: .82rem; }
+      p { font-size: 1.05rem; }
+    }
     @media (max-width: 1024px) { .tarifs-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 900px) {
       .about-grid, .contact-grid, .partenaires-grid { grid-template-columns: 1fr; gap: 2.2rem; }
@@ -259,13 +271,18 @@
   <div class="hero-grid"></div>
 
   <div class="hero-inner">
-    <div class="hero-tag">Support opérationnel aux entreprises</div>
-    <h1 class="hero-title">Libérez-vous<br/>de la corvée <em>administrative.</em></h1>
-    <p class="hero-slogan">— Cap sur l'essentiel —</p>
-    <p class="hero-desc">RG Cap Entreprises prend en charge la gestion quotidienne de votre entreprise pour que vous vous consacriez pleinement à votre passion et à votre cœur de métier.</p>
-    <div class="hero-actions">
-      <a href="#services" class="btn-primary">Découvrir les services</a>
-      <a href="#contact" class="btn-outline">Prendre contact</a>
+    <div class="hero-content">
+      <div class="hero-tag">Support opérationnel aux entreprises</div>
+      <h1 class="hero-title">Libérez-vous<br/>de la corvée <em>administrative.</em></h1>
+      <p class="hero-slogan">— Cap sur l'essentiel —</p>
+      <p class="hero-desc">RG Cap Entreprises prend en charge la gestion quotidienne de votre entreprise pour que vous vous consacriez pleinement à votre passion et à votre cœur de métier.</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">Découvrir les services</a>
+        <a href="#contact" class="btn-outline">Prendre contact</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="1000069584.png" alt="RG Cap Entreprises" class="hero-logo-large" />
     </div>
   </div>
   <div class="hero-scroll"><div class="scroll-line"></div><span>Défiler</span></div>
