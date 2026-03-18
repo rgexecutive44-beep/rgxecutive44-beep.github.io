@@ -33,7 +33,7 @@
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem max(6%, calc((100vw - 1400px) / 2)); background: var(--navy); transition: background .35s, box-shadow .35s; }
     nav { box-shadow: 0 2px 24px rgba(0,0,0,.2); }
     .nav-logo { display: flex; align-items: center; gap: .7rem; text-decoration: none; }
-    .nav-logo-img { height: clamp(52px, 5vw, 80px); width: auto; max-width: 280px; display: block; object-fit: contain; }
+    .nav-logo-img { height: clamp(52px, 5vw, 80px); width: auto; max-width: 280px; display: block; object-fit: contain; filter: none; }
     .nav-logo-img[src=""] { display: none; }
     .nav-logo-fallback { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.1rem; color: #fff; letter-spacing: .03em; display: none; }
     .nav-logo-fallback span { color: var(--tang); }
@@ -54,7 +54,7 @@
     .hero-inner { position: relative; z-index: 3; width: 92%; max-width: 1600px; margin: 0 auto; padding: 10rem 0 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
     .hero-content { display: flex; flex-direction: column; }
     .hero-visual { display: flex; align-items: center; justify-content: center; position: relative; }
-    .hero-logo-large { width: min(420px, 90%); opacity: .9; filter: brightness(0) invert(1); }
+    .hero-logo-large { width: min(480px, 90%); opacity: 1; filter: none; }
     @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; } .hero-visual { display: none; } }
     .hero-tag { display: inline-block; font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--tang); border: 1px solid var(--tang); padding: .3rem .9rem; border-radius: 2px; margin-bottom: 1.8rem; animation: fadeUp .8s ease both; }
     .hero-title { color: #fff !important; max-width: 100%; animation: fadeUp .8s .15s ease both; }
@@ -193,7 +193,7 @@
     footer { background: var(--navy); color: rgba(255,255,255,.4); padding: 2.2rem max(6%, calc((100vw - 1400px) / 2 + 2%)); }
     .footer-inner { max-width: min(1400px, 90vw); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-logo { display: flex; align-items: center; gap: .5rem; }
-    .footer-logo img { height: clamp(50px, 5vw, 72px); width: auto; }
+    .footer-logo img { height: clamp(50px, 5vw, 72px); width: auto; filter: none; }
     .footer-logo img:not([src]), .footer-logo img[src=""] { display: none; }
     .footer-slogan { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; margin-top: .3rem; color: rgba(255,255,255,.28); }
     .footer-legal { font-size: .71rem; }
@@ -241,7 +241,7 @@
 <!-- ── Navigation ── -->
 <nav id="navbar">
   <a href="#accueil" class="nav-logo">
-    <img src="1000069584.png" alt="RG Cap Entreprises" class="nav-logo-img" />
+    <img src="logo-transparent.png" alt="RG Cap Entreprises" class="nav-logo-img" />
     <div class="nav-logo-fallback"><span>RG</span> Cap Entreprises</div>
   </a>
   <ul class="nav-links">
@@ -282,7 +282,7 @@
       </div>
     </div>
     <div class="hero-visual">
-      <img src="1000069584.png" alt="RG Cap Entreprises" class="hero-logo-large" />
+      <img src="logo-transparent.png" alt="RG Cap Entreprises" class="hero-logo-large" />
     </div>
   </div>
   <div class="hero-scroll"><div class="scroll-line"></div><span>Défiler</span></div>
@@ -488,7 +488,7 @@
   <div class="footer-inner">
     <div>
       <div class="footer-logo">
-        <img src="1000069584.png" alt="RG Cap Entreprises" class="nav-logo-img" />
+        <img src="logo-transparent.png" alt="RG Cap Entreprises" class="nav-logo-img" />
         <div class="nav-logo-fallback"><span>RG</span> Cap Entreprises</div>
       </div>
       <div class="footer-slogan">— Cap sur l'essentiel —</div>
