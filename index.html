@@ -455,15 +455,17 @@
         <div class="contact-line"><div class="contact-line-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="contact-line-text"><strong>Zone d'intervention</strong><a href="#">Grand Ouest et Paris sur site · France entière à distance</a></div></div>
       </div>
       <div class="contact-form reveal">
-        <form id="contactForm" onsubmit="submitForm(event)">
+        <form id="contactForm" action="https://formspree.io/f/mkoqybdk" method="POST">
           <div class="form-row">
-            <div class="form-group"><label for="prenom">Prénom</label><input type="text" id="prenom" placeholder="Votre prénom" required /></div>
-            <div class="form-group"><label for="nom">Nom</label><input type="text" id="nom" placeholder="Votre nom" required /></div>
+            <div class="form-group"><label for="prenom">Prénom</label><input type="hidden" name="_next" value="https://www.rgce.fr?merci=1" />
+            <input type="hidden" name="_subject" value="Nouveau message depuis www.rgce.fr" />
+            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required /></div>
+            <div class="form-group"><label for="nom">Nom</label><input type="text" id="nom" name="nom" placeholder="Votre nom" required /></div>
           </div>
-          <div class="form-group"><label for="email">E-mail</label><input type="email" id="email" placeholder="votre@email.fr" required /></div>
-          <div class="form-group"><label for="tel">Téléphone</label><input type="tel" id="tel" placeholder="06 XX XX XX XX" /></div>
+          <div class="form-group"><label for="email">E-mail</label><input type="email" id="email" name="email" placeholder="votre@email.fr" required /></div>
+          <div class="form-group"><label for="tel">Téléphone</label><input type="tel" id="tel" name="tel" placeholder="06 XX XX XX XX" /></div>
           <div class="form-group"><label for="activite">Votre profil</label>
-            <select id="activite">
+            <select id="activite" name="activite">
               <option value="">Sélectionnez votre profil</option>
               <option>Artisan ou commerçant</option>
               <option>Profession libérale</option>
@@ -472,10 +474,9 @@
               <option>Autre</option>
             </select>
           </div>
-          <div class="form-group"><label for="besoin">Votre besoin</label><textarea id="besoin" placeholder="Décrivez brièvement votre situation et ce que vous recherchez..." required></textarea></div>
+          <div class="form-group"><label for="besoin">Votre besoin</label><textarea id="besoin" name="besoin" placeholder="Décrivez brièvement votre situation et ce que vous recherchez..." required></textarea></div>
           <button type="submit" class="form-submit">Envoyer ma demande</button>
           <p class="form-notice">Réponse garantie sous 48h · Échange confidentiel</p>
-          <div class="form-success" id="formSuccess">Merci pour votre message ! Romain vous recontacte dans les meilleurs délais.</div>
         </form>
       </div>
     </div>
