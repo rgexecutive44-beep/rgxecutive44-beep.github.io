@@ -124,6 +124,17 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
 .separator{height:0.5px;background:var(--border);margin:16px 0;}
 .form-box{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:16px;}
 
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(13,31,60,0.45);z-index:100;display:none;align-items:center;justify-content:center;padding:16px;}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:var(--radius);padding:24px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;box-shadow:0 8px 32px rgba(13,31,60,0.18);}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.modal-title{font-size:14px;font-weight:500;color:var(--navy);}
+.modal-close{background:none;border:none;font-size:18px;color:var(--gray-muted);cursor:pointer;line-height:1;padding:2px 6px;border-radius:4px;}
+.modal-close:hover{background:var(--bg);color:var(--text);}
+.edit-btn{background:#fff;color:var(--navy-light);border:0.5px solid var(--border);font-size:12px;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.edit-btn:hover{background:var(--bg);}
+
 /* PRINT */
 @media print{
   body{background:#fff;}
@@ -311,6 +322,40 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
 </div><!-- /content -->
 </div><!-- /app -->
 
+<!-- ═══ MODAL ÉDITION CLIENT ═══ -->
+<div class="modal-overlay" id="modal-edit" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Modifier le client</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="row">
+      <div class="col"><label>Nom client / société</label><input type="text" id="e-nom" placeholder="ex : Naoned Foods"></div>
+      <div class="col"><label>Type de contrat</label>
+        <select id="e-type">
+          <option value="forfait">Forfait heures fixe</option>
+          <option value="mensuel">Forfait mensuel récurrent</option>
+          <option value="regie">Régie libre</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" style="flex:0 0 150px;"><label>Objectif (h)</label><input type="number" id="e-objectif" min="0" step="1"></div>
+      <div class="col" style="flex:0 0 160px;"><label>Taux horaire (€/h)</label><input type="number" id="e-taux" min="0" step="0.5"></div>
+      <div class="col"><label>Période</label><input type="text" id="e-periode" placeholder="ex : Avril–Juillet 2026"></div>
+    </div>
+    <div class="row">
+      <div class="col"><label>Missions (une par ligne)</label>
+        <textarea id="e-missions" rows="5" style="resize:vertical;"></textarea>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px;">
+      <button class="btn btn-secondary" onclick="closeModal()">Annuler</button>
+      <button class="btn btn-primary" onclick="saveEdit()">Enregistrer les modifications</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ─── STATE ───
 let timerInterval=null,timerSeconds=0,timerRunning=false;
@@ -468,6 +513,36 @@ function deleteClient(id){
   db.entries=db.entries.filter(e=>e.clientId!=id);
   saveDB();renderClients();renderTotaux();
 }
+
+// ─── MODAL ÉDITION ───
+let editId=null;
+function openEdit(id){
+  const c=db.clients.find(x=>x.id==id);if(!c)return;
+  editId=id;
+  document.getElementById('e-nom').value=c.nom;
+  document.getElementById('e-type').value=c.type;
+  document.getElementById('e-objectif').value=c.objectif;
+  document.getElementById('e-taux').value=c.taux;
+  document.getElementById('e-periode').value=c.periode||'';
+  document.getElementById('e-missions').value=(c.missions||[]).join('\n');
+  document.getElementById('modal-edit').classList.add('open');
+}
+function closeModal(){document.getElementById('modal-edit').classList.remove('open');editId=null;}
+function saveEdit(){
+  if(!editId)return;
+  const c=db.clients.find(x=>x.id==editId);if(!c)return;
+  const nom=document.getElementById('e-nom').value.trim();
+  if(!nom){alert('Le nom ne peut pas être vide.');return;}
+  c.nom=nom;
+  c.type=document.getElementById('e-type').value;
+  c.objectif=parseFloat(document.getElementById('e-objectif').value)||0;
+  c.taux=parseFloat(document.getElementById('e-taux').value)||0;
+  c.periode=document.getElementById('e-periode').value.trim();
+  c.missions=document.getElementById('e-missions').value.trim().split('\n').map(m=>m.trim()).filter(Boolean);
+  // Mettre à jour le nom dans les imputations existantes
+  db.entries.forEach(e=>{if(e.clientId==editId)e.clientNom=c.nom;});
+  saveDB();closeModal();renderClients();populateSaisieSelects();renderRecent();
+}
 function renderClients(){
   const el=document.getElementById('clients-list');
   if(!db.clients.length){el.innerHTML='<div class="empty">Aucun client enregistré. Ajoutez votre premier client ci-dessus.</div>';return;}
@@ -482,6 +557,7 @@ function renderClients(){
     const initials=c.nom.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
     return `<div class="client-card">
       <button class="btn btn-danger del-btn" onclick="deleteClient(${c.id})">✕</button>
+      <button class="edit-btn" style="position:absolute;top:12px;right:48px;" onclick="openEdit(${c.id})">✎ Modifier</button>
       <div class="client-card-head">
         <div class="avatar">${initials}</div>
         <div><div class="client-name">${c.nom}</div><div class="client-sub">${c.periode||''}</div></div>
