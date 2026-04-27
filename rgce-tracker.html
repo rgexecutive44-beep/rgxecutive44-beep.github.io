@@ -14,10 +14,8 @@
   --border:rgba(13,31,60,0.13);--radius:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;min-height:100vh;}
-.app{max-width:860px;margin:0 auto;padding:24px 16px 48px;}
-
-/* TOPBAR */
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;min-height:100vh;padding-bottom:60px;}
+.app{max-width:1200px;margin:0 auto;padding:24px 20px 80px;}
 .topbar{background:var(--navy);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;border-radius:var(--radius) var(--radius) 0 0;flex-wrap:wrap;gap:10px;}
 .topbar-brand{display:flex;align-items:center;gap:10px;}
 .brand-wordmark{font-family:'Cormorant Garamond',serif;font-size:18px;letter-spacing:0.02em;}
@@ -28,33 +26,31 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 .nav button{background:transparent;border:0.5px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.65);border-radius:6px;padding:5px 14px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;}
 .nav button.active{background:var(--tangerine);border-color:var(--tangerine);color:#fff;}
 .nav button:hover:not(.active){background:rgba(255,255,255,0.1);color:#fff;}
-
-/* CONTENT */
 .content{background:var(--white);padding:24px;border:0.5px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);}
-.panel{display:none;}
-.panel.active{display:block;}
+.panel{display:none;}.panel.active{display:block;}
 .section-title{font-size:11px;font-weight:500;color:var(--navy);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px;padding-bottom:7px;border-bottom:0.5px solid var(--border);}
-
+/* BOTTOM BAR */
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:9px 24px;display:flex;align-items:center;gap:10px;z-index:50;border-top:2px solid var(--tangerine);}
+.bottom-bar-label{font-size:11px;color:rgba(255,255,255,0.4);margin-right:4px;}
+.bottom-bar .btn{padding:5px 14px;font-size:12px;}
+.bottom-bar .btn-io{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8);border:0.5px solid rgba(255,255,255,0.15);border-radius:7px;padding:5px 14px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
+.bottom-bar .btn-io:hover{background:rgba(255,255,255,0.16);color:#fff;}
 /* FORMS */
 .row{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
 .col{flex:1;min-width:150px;}
 label{display:block;font-size:12px;color:var(--gray-muted);margin-bottom:4px;}
-select,input[type=text],input[type=number],input[type=date],textarea{
-  width:100%;padding:8px 10px;border:0.5px solid var(--border);border-radius:7px;
-  background:#fff;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;
-  transition:border-color 0.15s;
-}
+select,input[type=text],input[type=number],input[type=date],textarea{width:100%;padding:8px 10px;border:0.5px solid var(--border);border-radius:7px;background:#fff;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;transition:border-color 0.15s;}
 select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outline-offset:1px;border-color:var(--tangerine);}
-
 /* BUTTONS */
 .btn{padding:8px 18px;border-radius:7px;font-size:13px;font-weight:500;cursor:pointer;border:0.5px solid;transition:all 0.15s;font-family:'DM Sans',sans-serif;}
 .btn-primary{background:var(--tangerine);color:#fff;border-color:var(--tangerine);}
-.btn-primary:hover{background:var(--tangerine-light);border-color:var(--tangerine-light);}
+.btn-primary:hover{background:var(--tangerine-light);}
 .btn-secondary{background:#fff;color:var(--navy);border-color:var(--border);}
 .btn-secondary:hover{background:var(--bg);}
 .btn-danger{background:#fff;color:#c0392b;border-color:rgba(192,57,43,0.3);font-size:12px;padding:4px 10px;}
 .btn-danger:hover{background:#fdf0ef;}
-
+.edit-btn{background:#fff;color:var(--navy-light);border:0.5px solid var(--border);font-size:12px;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.edit-btn:hover{background:var(--bg);}
 /* TIMER */
 .timer-box{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px 20px;display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap;}
 .timer-display{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--navy);font-variant-numeric:tabular-nums;min-width:110px;letter-spacing:0.04em;}
@@ -65,81 +61,81 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
 .timer-btn.reset{background:#fff;color:var(--gray-muted);border:0.5px solid var(--border);}
 .timer-status{font-size:12px;color:var(--gray-muted);margin-top:3px;}
 .timer-status.running{color:var(--tangerine);font-weight:500;}
-
 /* CA PREVIEW */
 .ca-preview{background:var(--navy);color:#fff;border-radius:var(--radius);padding:14px 20px;display:none;gap:0;margin-bottom:14px;flex-wrap:wrap;}
 .ca-preview.visible{display:flex;}
 .ca-preview-item{flex:1;min-width:100px;text-align:center;padding:0 12px;}
 .ca-preview-item:not(:last-child){border-right:0.5px solid rgba(255,255,255,0.12);}
 .ca-preview-label{font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:4px;}
-.ca-preview-value{font-size:20px;font-weight:300;letter-spacing:0.02em;}
+.ca-preview-value{font-size:20px;font-weight:300;}
 .ca-preview-value.accent{color:var(--tangerine-light);font-weight:500;}
-
 /* TABLES */
 .entries-table{width:100%;border-collapse:collapse;font-size:13px;}
 .entries-table th{text-align:left;padding:7px 10px;font-size:11px;font-weight:500;color:var(--gray-muted);text-transform:uppercase;letter-spacing:0.06em;border-bottom:0.5px solid var(--border);}
 .entries-table td{padding:8px 10px;border-bottom:0.5px solid var(--border);color:var(--text);}
 .entries-table tr:last-child td{border-bottom:none;}
 .entries-table tr:hover td{background:rgba(13,31,60,0.025);}
-
 /* TOTAUX */
 .totaux-bar{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;margin-top:18px;}
 .totaux-item{text-align:center;}
 .totaux-label{font-size:11px;color:var(--gray-muted);margin-bottom:3px;}
 .totaux-value{font-size:20px;font-weight:500;color:var(--navy);}
-
 /* BADGES */
 .badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:500;}
 .badge-forfait{background:#E6F1FB;color:#0C447C;}
 .badge-mensuel{background:#EAF3DE;color:#27500A;}
 .badge-regie{background:#FAEEDA;color:#633806;}
-
 /* PROGRESS */
 .progress-bar-bg{background:rgba(13,31,60,0.1);border-radius:20px;height:7px;overflow:hidden;margin-top:6px;}
 .progress-bar-fill{height:100%;border-radius:20px;transition:width 0.4s ease;}
 .fill-ok{background:var(--tangerine);}
 .fill-warn{background:#ef9f27;}
 .fill-over{background:#e24b4a;}
-
 /* CLIENT CARDS */
 .client-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:10px;position:relative;}
 .client-card-head{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
 .avatar{width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;}
 .client-name{font-weight:500;font-size:14px;}
 .client-sub{font-size:12px;color:var(--gray-muted);}
-.client-meta{display:flex;gap:14px;font-size:12px;color:var(--gray-muted);flex-wrap:wrap;}
+.client-meta{display:flex;gap:14px;font-size:12px;color:var(--gray-muted);flex-wrap:wrap;margin-bottom:8px;}
 .client-meta span strong{color:var(--text);}
 .del-btn{position:absolute;top:12px;right:12px;}
-
 /* METRIC CARDS */
 .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:18px;}
 .metric-card{background:var(--bg);border-radius:8px;padding:13px 16px;}
 .metric-label{font-size:11px;color:var(--gray-muted);margin-bottom:4px;}
 .metric-value{font-size:22px;font-weight:500;color:var(--navy);}
-
+/* MISSIONS AVEC TAUX */
+.mission-row{display:flex;gap:8px;align-items:center;margin-bottom:6px;}
+.mission-row input[type=text]{flex:2;}
+.mission-row input[type=number]{flex:0 0 110px;}
+.rm-mission-btn{background:none;border:none;color:var(--gray-muted);cursor:pointer;font-size:14px;padding:2px 6px;flex-shrink:0;line-height:1;}
+.rm-mission-btn:hover{color:#c0392b;}
+.add-mission-btn{background:none;border:0.5px dashed var(--border);border-radius:6px;color:var(--gray-muted);font-size:12px;padding:6px 12px;cursor:pointer;width:100%;margin-top:4px;font-family:'DM Sans',sans-serif;}
+.add-mission-btn:hover{background:var(--bg);color:var(--navy);}
 /* MISC */
 .empty{text-align:center;padding:22px;color:var(--gray-muted);font-size:13px;}
 .alert{padding:11px 14px;border-radius:7px;font-size:13px;margin-bottom:14px;}
 .alert-info{background:#E6F1FB;color:#0C447C;}
 .separator{height:0.5px;background:var(--border);margin:16px 0;}
 .form-box{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:16px;}
-
-/* MODAL */
+.mission-tag{display:inline-block;background:#fff;border:0.5px solid var(--border);border-radius:5px;padding:2px 8px;font-size:11px;margin:2px;}
+/* MODALS */
 .modal-overlay{position:fixed;inset:0;background:rgba(13,31,60,0.45);z-index:100;display:none;align-items:center;justify-content:center;padding:16px;}
 .modal-overlay.open{display:flex;}
-.modal{background:#fff;border-radius:var(--radius);padding:24px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;box-shadow:0 8px 32px rgba(13,31,60,0.18);}
+.modal{background:#fff;border-radius:var(--radius);padding:24px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;box-shadow:0 8px 32px rgba(13,31,60,0.18);}
 .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
 .modal-title{font-size:14px;font-weight:500;color:var(--navy);}
-.modal-close{background:none;border:none;font-size:18px;color:var(--gray-muted);cursor:pointer;line-height:1;padding:2px 6px;border-radius:4px;}
+.modal-close{background:none;border:none;font-size:18px;color:var(--gray-muted);cursor:pointer;padding:2px 6px;border-radius:4px;}
 .modal-close:hover{background:var(--bg);color:var(--text);}
-.edit-btn{background:#fff;color:var(--navy-light);border:0.5px solid var(--border);font-size:12px;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;}
-.edit-btn:hover{background:var(--bg);}
-
+.missions-header{display:flex;gap:8px;margin-bottom:6px;}
+.missions-header label{flex:2;margin-bottom:0;}
+.missions-header label:last-child{flex:0 0 110px;margin-bottom:0;}
 /* PRINT */
 @media print{
-  body{background:#fff;}
+  body{background:#fff;padding-bottom:0;}
   .app{padding:0;max-width:100%;}
-  .topbar,.nav,.no-print{display:none!important;}
+  .topbar,.nav,.no-print,.bottom-bar{display:none!important;}
   .content{border:none;padding:0;}
   .panel{display:none!important;}
   #panel-impression{display:block!important;}
@@ -168,81 +164,50 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
 
 <div class="content">
 
-<!-- ═══ SAISIE ═══ -->
+<!-- SAISIE -->
 <div id="panel-saisie" class="panel active">
   <div class="section-title">Imputation de temps</div>
-
   <div class="timer-box">
     <div>
       <div class="timer-display" id="timer-display">00:00:00</div>
       <div class="timer-status" id="timer-status">Arrêté</div>
     </div>
-    <button class="timer-btn start" id="btn-startstop" onclick="toggleTimer()" title="Démarrer / Arrêter">▶</button>
-    <button class="timer-btn reset" onclick="resetTimer()" title="Réinitialiser">↺</button>
+    <button class="timer-btn start" id="btn-startstop" onclick="toggleTimer()">▶</button>
+    <button class="timer-btn reset" onclick="resetTimer()">↺</button>
     <div style="font-size:12px;color:var(--gray-muted);">Démarre le chrono, stop → la durée<br>est transférée automatiquement.</div>
   </div>
-
   <div class="row">
-    <div class="col">
-      <label>Client</label>
-      <select id="s-client" onchange="updateMissions();updateCAPreview()">
-        <option value="">— Sélectionner —</option>
-      </select>
+    <div class="col"><label>Client</label>
+      <select id="s-client" onchange="updateMissions();updateCAPreview()"><option value="">— Sélectionner —</option></select>
     </div>
-    <div class="col">
-      <label>Mission</label>
-      <select id="s-mission">
-        <option value="">— Sélectionner —</option>
-      </select>
+    <div class="col"><label>Mission</label>
+      <select id="s-mission" onchange="updateCAPreview()"><option value="">— Sélectionner —</option></select>
     </div>
-    <div class="col" style="flex:0 0 150px;">
-      <label>Date</label>
-      <input type="date" id="s-date">
-    </div>
+    <div class="col" style="flex:0 0 150px;"><label>Date</label><input type="date" id="s-date"></div>
   </div>
   <div class="row">
-    <div class="col" style="flex:0 0 160px;">
-      <label>Durée (heures décimales)</label>
+    <div class="col" style="flex:0 0 160px;"><label>Durée (heures décimales)</label>
       <input type="number" id="s-duree" min="0.25" step="0.25" placeholder="ex : 1.5" oninput="updateCAPreview()">
     </div>
-    <div class="col">
-      <label>Commentaire</label>
-      <input type="text" id="s-comment" placeholder="Optionnel">
-    </div>
+    <div class="col"><label>Commentaire</label><input type="text" id="s-comment" placeholder="Optionnel"></div>
   </div>
-
   <div class="ca-preview" id="ca-preview">
-    <div class="ca-preview-item">
-      <div class="ca-preview-label">Taux horaire</div>
-      <div class="ca-preview-value" id="prev-taux">—</div>
-    </div>
-    <div class="ca-preview-item">
-      <div class="ca-preview-label">Durée saisie</div>
-      <div class="ca-preview-value" id="prev-duree">—</div>
-    </div>
-    <div class="ca-preview-item">
-      <div class="ca-preview-label">CA de cette imputation</div>
-      <div class="ca-preview-value accent" id="prev-ca">—</div>
-    </div>
-    <div class="ca-preview-item">
-      <div class="ca-preview-label">Consommé / Objectif</div>
-      <div class="ca-preview-value" id="prev-conso">—</div>
-    </div>
+    <div class="ca-preview-item"><div class="ca-preview-label">Taux horaire</div><div class="ca-preview-value" id="prev-taux">—</div></div>
+    <div class="ca-preview-item"><div class="ca-preview-label">Durée saisie</div><div class="ca-preview-value" id="prev-duree">—</div></div>
+    <div class="ca-preview-item"><div class="ca-preview-label">CA de cette imputation</div><div class="ca-preview-value accent" id="prev-ca">—</div></div>
+    <div class="ca-preview-item"><div class="ca-preview-label">Consommé / Objectif</div><div class="ca-preview-value" id="prev-conso">—</div></div>
   </div>
-
   <div style="display:flex;gap:8px;margin-bottom:22px;">
     <button class="btn btn-primary" onclick="saveEntry()">Enregistrer l'imputation</button>
     <button class="btn btn-secondary" onclick="showPanel('suivi')">Voir le suivi →</button>
   </div>
-
   <div class="section-title">Dernières imputations</div>
   <div style="overflow-x:auto;">
     <table class="entries-table">
-      <thead><tr><th>Date</th><th>Client</th><th>Mission</th><th>Durée</th><th>Taux</th><th>CA</th><th>Note</th><th></th></tr></thead>
+      <thead><tr><th>Date</th><th>Client</th><th>Mission</th><th>Durée</th><th>Taux</th><th>CA</th><th>Note</th><th style="min-width:90px;"></th></tr></thead>
       <tbody id="recent-entries"></tbody>
     </table>
   </div>
-
   <div class="totaux-bar">
     <div class="totaux-item"><div class="totaux-label">Total heures</div><div class="totaux-value" id="tot-h">0h</div></div>
     <div class="totaux-item"><div class="totaux-label">CA total facturable</div><div class="totaux-value" id="tot-ca">0 €</div></div>
@@ -251,11 +216,10 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
   </div>
 </div>
 
-<!-- ═══ CLIENTS ═══ -->
+<!-- CLIENTS -->
 <div id="panel-clients" class="panel">
   <div class="section-title">Base clients</div>
-  <div class="alert alert-info">Les données sont sauvegardées dans votre navigateur (localStorage). Utilisez l'export JSON pour les sauvegarder ou les transférer sur un autre appareil.</div>
-
+  <div class="alert alert-info">Chaque mission peut avoir son propre taux horaire. Exemple : Formation à 40€/h et Back office à 46,67€/h pour un même client.</div>
   <div class="form-box">
     <div class="section-title">Ajouter un client</div>
     <div class="row">
@@ -267,29 +231,23 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
           <option value="regie">Régie libre</option>
         </select>
       </div>
-      <div class="col" style="flex:0 0 130px;"><label>Objectif (h)</label><input type="number" id="c-objectif" min="0" step="1" placeholder="ex : 90"></div>
+      <div class="col" style="flex:0 0 140px;"><label>Objectif total (h)</label><input type="number" id="c-objectif" min="0" step="1" placeholder="ex : 100"></div>
+      <div class="col" style="flex:0 0 160px;"><label>Période</label><input type="text" id="c-periode" placeholder="ex : Avr–Juil 2026"></div>
     </div>
-    <div class="row">
-      <div class="col" style="flex:0 0 160px;"><label>Taux horaire (€/h)</label><input type="number" id="c-taux" min="0" step="0.5" placeholder="ex : 45"></div>
-      <div class="col"><label>Période</label><input type="text" id="c-periode" placeholder="ex : Avril–Juillet 2026"></div>
-    </div>
-    <div class="row">
-      <div class="col"><label>Missions (une par ligne)</label>
-        <textarea id="c-missions" rows="4" style="resize:vertical;" placeholder="Administration générale&#10;Facturation & relances&#10;Trésorerie&#10;Support RH"></textarea>
+    <div style="margin-bottom:10px;">
+      <div class="missions-header">
+        <label>Mission</label>
+        <label>Taux (€/h)</label>
       </div>
+      <div id="c-missions-list"></div>
+      <button class="add-mission-btn" onclick="addMissionRow('c-missions-list')">+ Ajouter une mission</button>
     </div>
     <button class="btn btn-primary" onclick="addClient()">Ajouter le client</button>
   </div>
-
   <div id="clients-list"></div>
-
-  <div style="display:flex;gap:8px;margin-top:16px;" class="no-print">
-    <button class="btn btn-secondary" onclick="exportJSON()">⬇ Exporter JSON</button>
-    <label class="btn btn-secondary" style="cursor:pointer;">⬆ Importer JSON<input type="file" accept=".json" onchange="importJSON(event)" style="display:none;width:auto;"></label>
-  </div>
 </div>
 
-<!-- ═══ SUIVI ═══ -->
+<!-- SUIVI -->
 <div id="panel-suivi" class="panel">
   <div class="section-title">Tableau de bord</div>
   <div class="row" style="margin-bottom:8px;">
@@ -300,7 +258,7 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
   <div id="suivi-content"></div>
 </div>
 
-<!-- ═══ IMPRESSION ═══ -->
+<!-- IMPRESSION -->
 <div id="panel-impression" class="panel">
   <div id="print-controls" class="no-print">
     <div class="section-title">Générer un relevé client</div>
@@ -322,15 +280,23 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
 </div><!-- /content -->
 </div><!-- /app -->
 
-<!-- ═══ MODAL ÉDITION CLIENT ═══ -->
-<div class="modal-overlay" id="modal-edit" onclick="if(event.target===this)closeModal()">
+<!-- BARRE FIXE BAS -->
+<div class="bottom-bar no-print">
+  <span class="bottom-bar-label">Données :</span>
+  <button class="btn-io" onclick="exportJSON()">⬇ Exporter JSON</button>
+  <label class="btn-io" style="cursor:pointer;">⬆ Importer JSON<input type="file" accept=".json" onchange="importJSON(event)" style="display:none;"></label>
+  <span style="margin-left:auto;font-size:11px;color:rgba(255,255,255,0.3);" id="bottom-info"></span>
+</div>
+
+<!-- MODAL ÉDITION CLIENT -->
+<div class="modal-overlay" id="modal-edit-client" onclick="if(event.target===this)closeModal('modal-edit-client')">
   <div class="modal">
     <div class="modal-header">
       <div class="modal-title">Modifier le client</div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <button class="modal-close" onclick="closeModal('modal-edit-client')">✕</button>
     </div>
     <div class="row">
-      <div class="col"><label>Nom client / société</label><input type="text" id="e-nom" placeholder="ex : Naoned Foods"></div>
+      <div class="col"><label>Nom client / société</label><input type="text" id="e-nom"></div>
       <div class="col"><label>Type de contrat</label>
         <select id="e-type">
           <option value="forfait">Forfait heures fixe</option>
@@ -340,48 +306,101 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
       </div>
     </div>
     <div class="row">
-      <div class="col" style="flex:0 0 150px;"><label>Objectif (h)</label><input type="number" id="e-objectif" min="0" step="1"></div>
-      <div class="col" style="flex:0 0 160px;"><label>Taux horaire (€/h)</label><input type="number" id="e-taux" min="0" step="0.5"></div>
-      <div class="col"><label>Période</label><input type="text" id="e-periode" placeholder="ex : Avril–Juillet 2026"></div>
+      <div class="col" style="flex:0 0 140px;"><label>Objectif total (h)</label><input type="number" id="e-objectif" min="0" step="1"></div>
+      <div class="col"><label>Période</label><input type="text" id="e-periode"></div>
+    </div>
+    <div style="margin-bottom:14px;">
+      <div class="missions-header">
+        <label>Mission</label>
+        <label>Taux (€/h)</label>
+      </div>
+      <div id="e-missions-list"></div>
+      <button class="add-mission-btn" onclick="addMissionRow('e-missions-list')">+ Ajouter une mission</button>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;">
+      <button class="btn btn-secondary" onclick="closeModal('modal-edit-client')">Annuler</button>
+      <button class="btn btn-primary" onclick="saveEditClient()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ÉDITION IMPUTATION -->
+<div class="modal-overlay" id="modal-edit-entry" onclick="if(event.target===this)closeModal('modal-edit-entry')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Modifier l'imputation</div>
+      <button class="modal-close" onclick="closeModal('modal-edit-entry')">✕</button>
     </div>
     <div class="row">
-      <div class="col"><label>Missions (une par ligne)</label>
-        <textarea id="e-missions" rows="5" style="resize:vertical;"></textarea>
+      <div class="col"><label>Client</label>
+        <select id="ee-client" onchange="updateEntryMissions();updateEntryTaux()"><option value="">— Sélectionner —</option></select>
+      </div>
+      <div class="col"><label>Mission</label>
+        <select id="ee-mission" onchange="updateEntryTaux()"><option value="">— Sélectionner —</option></select>
       </div>
     </div>
-    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px;">
-      <button class="btn btn-secondary" onclick="closeModal()">Annuler</button>
-      <button class="btn btn-primary" onclick="saveEdit()">Enregistrer les modifications</button>
+    <div class="row">
+      <div class="col" style="flex:0 0 140px;"><label>Date</label><input type="date" id="ee-date"></div>
+      <div class="col" style="flex:0 0 140px;"><label>Durée (h décimales)</label><input type="number" id="ee-duree" min="0.25" step="0.25"></div>
+      <div class="col" style="flex:0 0 130px;"><label>Taux (€/h)</label><input type="number" id="ee-taux" min="0" step="0.01"></div>
+    </div>
+    <div class="row">
+      <div class="col"><label>Commentaire</label><input type="text" id="ee-comment" placeholder="Optionnel"></div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;">
+      <button class="btn btn-secondary" onclick="closeModal('modal-edit-entry')">Annuler</button>
+      <button class="btn btn-primary" onclick="saveEditEntry()">Enregistrer</button>
     </div>
   </div>
 </div>
 
 <script>
-// ─── STATE ───
 let timerInterval=null,timerSeconds=0,timerRunning=false;
 let db={clients:[],entries:[]};
+let editClientId=null,editEntryId=null;
 
 function loadDB(){try{const s=localStorage.getItem('rgce_tracker');if(s)db=JSON.parse(s);}catch(e){}}
-function saveDB(){localStorage.setItem('rgce_tracker',JSON.stringify(db));}
+function saveDB(){
+  localStorage.setItem('rgce_tracker',JSON.stringify(db));
+  document.getElementById('bottom-info').textContent=db.clients.length+' client(s) · '+db.entries.length+' imputation(s)';
+}
 
-// ─── NAVIGATION ───
 function showPanel(id){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+id).classList.add('active');
-  document.querySelectorAll('.nav button').forEach((b,i)=>{
-    b.classList.toggle('active',['saisie','clients','suivi','impression'][i]===id);
-  });
+  document.querySelectorAll('.nav button').forEach((b,i)=>b.classList.toggle('active',['saisie','clients','suivi','impression'][i]===id));
   if(id==='saisie'){populateSaisieSelects();renderRecent();renderTotaux();}
   if(id==='clients'){renderClients();}
   if(id==='suivi'){renderSuivi();}
   if(id==='impression'){populatePrintSelect();renderPrint();}
 }
 
-// ─── TIMER ───
+// MISSIONS DYNAMIQUES
+function addMissionRow(cid,nom='',taux=''){
+  const c=document.getElementById(cid);
+  const d=document.createElement('div');d.className='mission-row';
+  d.innerHTML=`<input type="text" placeholder="ex : Back office externalisé" value="${nom}" style="flex:2;">
+    <input type="number" placeholder="46.67" step="0.01" min="0" value="${taux}" style="flex:0 0 110px;">
+    <button class="rm-mission-btn" onclick="this.parentElement.remove()">✕</button>`;
+  c.appendChild(d);
+}
+function getMissions(cid){
+  return Array.from(document.querySelectorAll('#'+cid+' .mission-row')).map(r=>{
+    const i=r.querySelectorAll('input');
+    return{nom:i[0].value.trim(),taux:parseFloat(i[1].value)||0};
+  }).filter(m=>m.nom);
+}
+function getTaux(client,missionNom){
+  if(!client||!client.missions)return 0;
+  const m=client.missions.find(x=>(typeof x==='string'?x:x.nom)===missionNom);
+  if(!m)return client.taux||0;
+  return typeof m==='string'?client.taux||0:m.taux;
+}
+
+// TIMER
 function toggleTimer(){
   if(!timerRunning){
-    timerRunning=true;
-    timerInterval=setInterval(()=>{timerSeconds++;updateTimerDisplay();},1000);
+    timerRunning=true;timerInterval=setInterval(()=>{timerSeconds++;updateTimerDisplay();},1000);
     document.getElementById('btn-startstop').innerHTML='⏹';
     document.getElementById('btn-startstop').classList.replace('start','stop');
     document.getElementById('timer-status').textContent='En cours…';
@@ -406,36 +425,34 @@ function resetTimer(){
 }
 function updateTimerDisplay(){
   const h=Math.floor(timerSeconds/3600),m=Math.floor((timerSeconds%3600)/60),s=timerSeconds%60;
-  document.getElementById('timer-display').textContent=
-    `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  document.getElementById('timer-display').textContent=`${pad(h)}:${pad(m)}:${pad(s)}`;
 }
+function pad(n){return String(n).padStart(2,'0');}
 
-// ─── CA PREVIEW ───
+// CA PREVIEW
 function updateCAPreview(){
   const cid=document.getElementById('s-client').value;
+  const mNom=document.getElementById('s-mission').value;
   const duree=parseFloat(document.getElementById('s-duree').value);
   const box=document.getElementById('ca-preview');
   if(!cid){box.classList.remove('visible');return;}
-  const c=db.clients.find(x=>x.id==cid);
-  if(!c){box.classList.remove('visible');return;}
+  const c=db.clients.find(x=>x.id==cid);if(!c){box.classList.remove('visible');return;}
+  const taux=getTaux(c,mNom);
   box.classList.add('visible');
-  document.getElementById('prev-taux').textContent=c.taux+'€/h';
-  const dejaConso=db.entries.filter(e=>e.clientId==cid).reduce((s,e)=>s+e.duree,0);
+  document.getElementById('prev-taux').textContent=taux+'€/h';
+  const conso=db.entries.filter(e=>e.clientId==cid).reduce((s,e)=>s+e.duree,0);
   if(!isNaN(duree)&&duree>0){
     document.getElementById('prev-duree').textContent=duree.toFixed(2)+'h';
-    document.getElementById('prev-ca').textContent=(duree*c.taux).toFixed(0)+'€';
-    const apres=dejaConso+duree;
-    document.getElementById('prev-conso').textContent=c.objectif>0
-      ?`${apres.toFixed(1)}h / ${c.objectif}h`:apres.toFixed(1)+'h';
+    document.getElementById('prev-ca').textContent=(duree*taux).toFixed(0)+'€';
+    document.getElementById('prev-conso').textContent=c.objectif>0?`${(conso+duree).toFixed(1)}h / ${c.objectif}h`:(conso+duree).toFixed(1)+'h';
   } else {
     document.getElementById('prev-duree').textContent='—';
     document.getElementById('prev-ca').textContent='—';
-    document.getElementById('prev-conso').textContent=c.objectif>0
-      ?`${dejaConso.toFixed(1)}h / ${c.objectif}h`:dejaConso.toFixed(1)+'h';
+    document.getElementById('prev-conso').textContent=c.objectif>0?`${conso.toFixed(1)}h / ${c.objectif}h`:conso.toFixed(1)+'h';
   }
 }
 
-// ─── SAISIE ───
+// SAISIE
 function populateSaisieSelects(){
   const sc=document.getElementById('s-client'),cur=sc.value;
   sc.innerHTML='<option value="">— Sélectionner —</option>';
@@ -449,21 +466,24 @@ function updateMissions(){
   sm.innerHTML='<option value="">— Sélectionner —</option>';
   if(!cid)return;
   const c=db.clients.find(x=>x.id==cid);
-  if(c&&c.missions)c.missions.forEach(m=>sm.innerHTML+=`<option>${m}</option>`);
+  if(c&&c.missions)c.missions.forEach(m=>{
+    const nom=typeof m==='string'?m:m.nom;
+    const taux=typeof m==='object'?` (${m.taux}€/h)`:'';
+    sm.innerHTML+=`<option value="${nom}">${nom}${taux}</option>`;
+  });
 }
 function saveEntry(){
   const cid=document.getElementById('s-client').value;
-  const mission=document.getElementById('s-mission').value;
+  const mNom=document.getElementById('s-mission').value;
   const date=document.getElementById('s-date').value;
   const duree=parseFloat(document.getElementById('s-duree').value);
   const comment=document.getElementById('s-comment').value;
-  if(!cid||!mission||!date||isNaN(duree)||duree<=0){alert('Merci de remplir tous les champs obligatoires.');return;}
+  if(!cid||!mNom||!date||isNaN(duree)||duree<=0){alert('Merci de remplir tous les champs obligatoires.');return;}
   const c=db.clients.find(x=>x.id==cid);
-  const taux=c?c.taux:0;
-  db.entries.push({id:Date.now(),clientId:cid,clientNom:c?c.nom:'',mission,date,duree,comment,taux,ca:+(duree*taux).toFixed(2)});
+  const taux=getTaux(c,mNom);
+  db.entries.push({id:Date.now(),clientId:cid,clientNom:c?c.nom:'',mission:mNom,date,duree,comment,taux,ca:+(duree*taux).toFixed(2)});
   saveDB();
-  document.getElementById('s-duree').value='';
-  document.getElementById('s-comment').value='';
+  document.getElementById('s-duree').value='';document.getElementById('s-comment').value='';
   resetTimer();renderRecent();renderTotaux();updateCAPreview();
 }
 function deleteEntry(id){
@@ -481,7 +501,10 @@ function renderRecent(){
     <td style="color:var(--gray-muted);">${e.taux}€/h</td>
     <td><strong style="color:var(--tangerine);">${e.ca.toFixed(0)}€</strong></td>
     <td style="color:var(--gray-muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;">${e.comment||'—'}</td>
-    <td><button class="btn btn-danger" onclick="deleteEntry(${e.id})">✕</button></td>
+    <td style="white-space:nowrap;">
+      <button class="edit-btn" onclick="openEditEntry(${e.id})" style="margin-right:4px;">✎</button>
+      <button class="btn btn-danger" onclick="deleteEntry(${e.id})">✕</button>
+    </td>
   </tr>`).join('');
 }
 function renderTotaux(){
@@ -493,55 +516,24 @@ function renderTotaux(){
   document.getElementById('tot-clients').textContent=db.clients.length;
 }
 
-// ─── CLIENTS ───
+// CLIENTS
 function addClient(){
   const nom=document.getElementById('c-nom').value.trim();
   if(!nom){alert('Merci de renseigner le nom du client.');return;}
-  const type=document.getElementById('c-type').value;
-  const objectif=parseFloat(document.getElementById('c-objectif').value)||0;
-  const taux=parseFloat(document.getElementById('c-taux').value)||0;
-  const periode=document.getElementById('c-periode').value.trim();
-  const missions=document.getElementById('c-missions').value.trim().split('\n').map(m=>m.trim()).filter(Boolean);
-  db.clients.push({id:Date.now(),nom,type,objectif,taux,periode,missions});
+  const missions=getMissions('c-missions-list');
+  if(!missions.length){alert('Ajoutez au moins une mission avec son taux.');return;}
+  db.clients.push({id:Date.now(),nom,type:document.getElementById('c-type').value,
+    objectif:parseFloat(document.getElementById('c-objectif').value)||0,
+    periode:document.getElementById('c-periode').value.trim(),missions});
   saveDB();
-  ['c-nom','c-objectif','c-taux','c-periode','c-missions'].forEach(id=>document.getElementById(id).value='');
-  renderClients();
+  document.getElementById('c-nom').value='';document.getElementById('c-objectif').value='';document.getElementById('c-periode').value='';
+  document.getElementById('c-missions-list').innerHTML='';addMissionRow('c-missions-list');
+  renderClients();populateSaisieSelects();
 }
 function deleteClient(id){
   if(!confirm('Supprimer ce client et toutes ses imputations ?'))return;
-  db.clients=db.clients.filter(c=>c.id!=id);
-  db.entries=db.entries.filter(e=>e.clientId!=id);
-  saveDB();renderClients();renderTotaux();
-}
-
-// ─── MODAL ÉDITION ───
-let editId=null;
-function openEdit(id){
-  const c=db.clients.find(x=>x.id==id);if(!c)return;
-  editId=id;
-  document.getElementById('e-nom').value=c.nom;
-  document.getElementById('e-type').value=c.type;
-  document.getElementById('e-objectif').value=c.objectif;
-  document.getElementById('e-taux').value=c.taux;
-  document.getElementById('e-periode').value=c.periode||'';
-  document.getElementById('e-missions').value=(c.missions||[]).join('\n');
-  document.getElementById('modal-edit').classList.add('open');
-}
-function closeModal(){document.getElementById('modal-edit').classList.remove('open');editId=null;}
-function saveEdit(){
-  if(!editId)return;
-  const c=db.clients.find(x=>x.id==editId);if(!c)return;
-  const nom=document.getElementById('e-nom').value.trim();
-  if(!nom){alert('Le nom ne peut pas être vide.');return;}
-  c.nom=nom;
-  c.type=document.getElementById('e-type').value;
-  c.objectif=parseFloat(document.getElementById('e-objectif').value)||0;
-  c.taux=parseFloat(document.getElementById('e-taux').value)||0;
-  c.periode=document.getElementById('e-periode').value.trim();
-  c.missions=document.getElementById('e-missions').value.trim().split('\n').map(m=>m.trim()).filter(Boolean);
-  // Mettre à jour le nom dans les imputations existantes
-  db.entries.forEach(e=>{if(e.clientId==editId)e.clientNom=c.nom;});
-  saveDB();closeModal();renderClients();populateSaisieSelects();renderRecent();
+  db.clients=db.clients.filter(c=>c.id!=id);db.entries=db.entries.filter(e=>e.clientId!=id);
+  saveDB();renderClients();renderTotaux();populateSaisieSelects();
 }
 function renderClients(){
   const el=document.getElementById('clients-list');
@@ -555,92 +547,173 @@ function renderClients(){
     const pct=c.objectif>0?Math.min((hConsos/c.objectif)*100,100):0;
     const fillClass=pct<75?'fill-ok':pct<100?'fill-warn':'fill-over';
     const initials=c.nom.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+    const mTags=(c.missions||[]).map(m=>{
+      const nom=typeof m==='string'?m:m.nom;
+      const t=typeof m==='object'?` · ${m.taux}€/h`:'';
+      return `<span class="mission-tag">${nom}${t}</span>`;
+    }).join('');
     return `<div class="client-card">
       <button class="btn btn-danger del-btn" onclick="deleteClient(${c.id})">✕</button>
-      <button class="edit-btn" style="position:absolute;top:12px;right:48px;" onclick="openEdit(${c.id})">✎ Modifier</button>
+      <button class="edit-btn" style="position:absolute;top:12px;right:48px;" onclick="openEditClient(${c.id})">✎ Modifier</button>
       <div class="client-card-head">
         <div class="avatar">${initials}</div>
         <div><div class="client-name">${c.nom}</div><div class="client-sub">${c.periode||''}</div></div>
-        <div style="margin-left:auto;margin-right:40px;"><span class="badge ${typeBadge[c.type]}">${typeLabel[c.type]}</span></div>
+        <div style="margin-left:auto;margin-right:110px;"><span class="badge ${typeBadge[c.type]}">${typeLabel[c.type]}</span></div>
       </div>
       <div class="client-meta">
         <span>Objectif : <strong>${c.objectif}h</strong></span>
         <span>Consommé : <strong>${hConsos.toFixed(2)}h</strong></span>
-        <span>Taux : <strong>${c.taux}€/h</strong></span>
         <span>CA : <strong style="color:var(--tangerine);">${ca.toFixed(0)}€</strong></span>
         ${c.objectif>0?`<span>Reste : <strong>${Math.max(0,c.objectif-hConsos).toFixed(2)}h</strong></span>`:''}
       </div>
-      ${c.objectif>0?`<div style="margin-top:10px;">
+      ${c.objectif>0?`<div style="margin-bottom:10px;">
         <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--gray-muted);margin-bottom:4px;">
-          <span>${pct.toFixed(0)}% consommé</span>
-          <span>${Math.max(0,(c.objectif-hConsos)*c.taux).toFixed(0)}€ restants à facturer</span>
+          <span>${pct.toFixed(0)}% consommé</span><span>${Math.max(0,c.objectif-hConsos).toFixed(2)}h restantes</span>
         </div>
         <div class="progress-bar-bg"><div class="progress-bar-fill ${fillClass}" style="width:${pct}%"></div></div>
       </div>`:''}
-      ${c.missions&&c.missions.length?`<div style="margin-top:10px;font-size:12px;color:var(--gray-muted);">Missions : ${c.missions.join(' · ')}</div>`:''}
+      <div style="font-size:11px;color:var(--gray-muted);margin-bottom:4px;">Missions :</div>
+      <div>${mTags}</div>
     </div>`;
   }).join('');
 }
 
-// ─── SUIVI ───
+// MODAL ÉDITION CLIENT
+function openEditClient(id){
+  const c=db.clients.find(x=>x.id==id);if(!c)return;
+  editClientId=id;
+  document.getElementById('e-nom').value=c.nom;
+  document.getElementById('e-type').value=c.type;
+  document.getElementById('e-objectif').value=c.objectif;
+  document.getElementById('e-periode').value=c.periode||'';
+  const ml=document.getElementById('e-missions-list');ml.innerHTML='';
+  (c.missions||[]).forEach(m=>{
+    const nom=typeof m==='string'?m:m.nom;
+    const taux=typeof m==='object'?m.taux:'';
+    addMissionRow('e-missions-list',nom,taux);
+  });
+  openModal('modal-edit-client');
+}
+function saveEditClient(){
+  if(!editClientId)return;
+  const c=db.clients.find(x=>x.id==editClientId);if(!c)return;
+  const nom=document.getElementById('e-nom').value.trim();
+  if(!nom){alert('Le nom ne peut pas être vide.');return;}
+  const missions=getMissions('e-missions-list');
+  if(!missions.length){alert('Au moins une mission requise.');return;}
+  c.nom=nom;c.type=document.getElementById('e-type').value;
+  c.objectif=parseFloat(document.getElementById('e-objectif').value)||0;
+  c.periode=document.getElementById('e-periode').value.trim();c.missions=missions;
+  db.entries.forEach(e=>{if(e.clientId==editClientId)e.clientNom=c.nom;});
+  saveDB();closeModal('modal-edit-client');renderClients();populateSaisieSelects();renderRecent();
+}
+
+// MODAL ÉDITION IMPUTATION
+function openEditEntry(id){
+  const e=db.entries.find(x=>x.id==id);if(!e)return;
+  editEntryId=id;
+  const sel=document.getElementById('ee-client');
+  sel.innerHTML='<option value="">— Sélectionner —</option>';
+  db.clients.forEach(c=>sel.innerHTML+=`<option value="${c.id}">${c.nom}</option>`);
+  sel.value=e.clientId;updateEntryMissions();
+  document.getElementById('ee-mission').value=e.mission;
+  document.getElementById('ee-date').value=e.date;
+  document.getElementById('ee-duree').value=e.duree;
+  document.getElementById('ee-taux').value=e.taux;
+  document.getElementById('ee-comment').value=e.comment||'';
+  openModal('modal-edit-entry');
+}
+function updateEntryMissions(){
+  const cid=document.getElementById('ee-client').value;
+  const sm=document.getElementById('ee-mission');
+  sm.innerHTML='<option value="">— Sélectionner —</option>';
+  if(!cid)return;
+  const c=db.clients.find(x=>x.id==cid);
+  if(c&&c.missions)c.missions.forEach(m=>{
+    const nom=typeof m==='string'?m:m.nom;
+    sm.innerHTML+=`<option value="${nom}">${nom}</option>`;
+  });
+}
+function updateEntryTaux(){
+  const cid=document.getElementById('ee-client').value;
+  const mNom=document.getElementById('ee-mission').value;
+  if(!cid||!mNom)return;
+  const c=db.clients.find(x=>x.id==cid);
+  document.getElementById('ee-taux').value=getTaux(c,mNom);
+}
+function saveEditEntry(){
+  if(!editEntryId)return;
+  const e=db.entries.find(x=>x.id==editEntryId);if(!e)return;
+  const cid=document.getElementById('ee-client').value;
+  const mNom=document.getElementById('ee-mission').value;
+  const date=document.getElementById('ee-date').value;
+  const duree=parseFloat(document.getElementById('ee-duree').value);
+  const taux=parseFloat(document.getElementById('ee-taux').value)||0;
+  const comment=document.getElementById('ee-comment').value;
+  if(!cid||!mNom||!date||isNaN(duree)||duree<=0){alert('Merci de remplir tous les champs obligatoires.');return;}
+  const c=db.clients.find(x=>x.id==cid);
+  e.clientId=cid;e.clientNom=c?c.nom:'';e.mission=mNom;e.date=date;
+  e.duree=duree;e.taux=taux;e.ca=+(duree*taux).toFixed(2);e.comment=comment;
+  saveDB();closeModal('modal-edit-entry');renderRecent();renderTotaux();
+}
+
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');editClientId=null;editEntryId=null;}
+
+// SUIVI
 function renderSuivi(){
-  const fc=document.getElementById('filter-client'),filterSel=fc.value;
+  const fc=document.getElementById('filter-client'),fSel=fc.value;
   fc.innerHTML='<option value="">Tous les clients</option>';
   db.clients.forEach(c=>fc.innerHTML+=`<option value="${c.id}">${c.nom}</option>`);
-  fc.value=filterSel;
+  fc.value=fSel;
   const el=document.getElementById('suivi-content');
-  const clientsToShow=filterSel?db.clients.filter(c=>c.id==filterSel):db.clients;
-  if(!clientsToShow.length){el.innerHTML='<div class="empty">Aucun client. Créez-en un dans l\'onglet Clients.</div>';return;}
-  const totalH=db.entries.reduce((s,e)=>s+e.duree,0);
-  const totalCA=db.entries.reduce((s,e)=>s+e.ca,0);
+  const clients=fSel?db.clients.filter(c=>c.id==fSel):db.clients;
+  if(!clients.length){el.innerHTML='<div class="empty">Aucun client. Créez-en un dans l\'onglet Clients.</div>';return;}
+  const tH=db.entries.reduce((s,e)=>s+e.duree,0);
+  const tCA=db.entries.reduce((s,e)=>s+e.ca,0);
   let html=`<div class="summary-grid">
-    <div class="metric-card"><div class="metric-label">Total heures</div><div class="metric-value">${totalH.toFixed(1)}h</div></div>
-    <div class="metric-card"><div class="metric-label">CA facturable total</div><div class="metric-value">${totalCA.toFixed(0)}€</div></div>
+    <div class="metric-card"><div class="metric-label">Total heures</div><div class="metric-value">${tH.toFixed(1)}h</div></div>
+    <div class="metric-card"><div class="metric-label">CA facturable total</div><div class="metric-value">${tCA.toFixed(0)}€</div></div>
     <div class="metric-card"><div class="metric-label">Clients actifs</div><div class="metric-value">${db.clients.length}</div></div>
     <div class="metric-card"><div class="metric-label">Imputations</div><div class="metric-value">${db.entries.length}</div></div>
   </div>`;
-  clientsToShow.forEach(c=>{
+  clients.forEach(c=>{
     const entries=db.entries.filter(e=>e.clientId==c.id).sort((a,b)=>b.date.localeCompare(a.date));
-    const hConsos=entries.reduce((s,e)=>s+e.duree,0);
+    const hC=entries.reduce((s,e)=>s+e.duree,0);
     const ca=entries.reduce((s,e)=>s+e.ca,0);
-    const pct=c.objectif>0?Math.min((hConsos/c.objectif)*100,100):0;
+    const pct=c.objectif>0?Math.min((hC/c.objectif)*100,100):0;
     const fillClass=pct<75?'fill-ok':pct<100?'fill-warn':'fill-over';
     html+=`<div class="client-card" style="margin-bottom:14px;">
       <div class="client-card-head" style="margin-bottom:10px;">
         <div class="avatar">${c.nom.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()}</div>
         <div><div class="client-name">${c.nom}</div><div class="client-sub">${c.periode||''}</div></div>
         <div style="margin-left:auto;text-align:right;font-size:13px;">
-          <div style="font-weight:500;color:var(--navy);">${hConsos.toFixed(2)}h / ${c.objectif}h</div>
+          <div style="font-weight:500;color:var(--navy);">${hC.toFixed(2)}h / ${c.objectif}h</div>
           <div style="font-weight:500;color:var(--tangerine);">${ca.toFixed(0)}€ CA</div>
-          <div style="font-size:11px;color:var(--gray-muted);">Taux : ${c.taux}€/h</div>
         </div>
       </div>
       ${c.objectif>0?`<div style="margin-bottom:12px;">
         <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--gray-muted);margin-bottom:4px;">
-          <span>${pct.toFixed(0)}% consommé</span>
-          <span>Reste : ${Math.max(0,c.objectif-hConsos).toFixed(2)}h — ${Math.max(0,(c.objectif-hConsos)*c.taux).toFixed(0)}€</span>
+          <span>${pct.toFixed(0)}% consommé</span><span>Reste : ${Math.max(0,c.objectif-hC).toFixed(2)}h</span>
         </div>
         <div class="progress-bar-bg"><div class="progress-bar-fill ${fillClass}" style="width:${pct}%"></div></div>
       </div>`:''}
       ${entries.length?`<div style="overflow-x:auto;"><table class="entries-table"><thead><tr>
         <th>Date</th><th>Mission</th><th>Durée</th><th>Taux</th><th>CA</th><th>Note</th>
-      </tr></thead><tbody>
-        ${entries.slice(0,6).map(e=>`<tr>
-          <td>${fmtDate(e.date)}</td><td>${e.mission}</td>
-          <td>${e.duree.toFixed(2)}h</td>
-          <td style="color:var(--gray-muted);">${e.taux}€/h</td>
-          <td style="color:var(--tangerine);font-weight:500;">${e.ca.toFixed(0)}€</td>
-          <td style="color:var(--gray-muted);">${e.comment||'—'}</td>
-        </tr>`).join('')}
-      </tbody></table></div>
-      ${entries.length>6?`<div style="font-size:11px;color:var(--gray-muted);margin-top:6px;text-align:right;">${entries.length-6} imputation(s) de plus — voir onglet Impression pour le détail complet.</div>`:''}`:
+      </tr></thead><tbody>${entries.slice(0,6).map(e=>`<tr>
+        <td>${fmtDate(e.date)}</td><td>${e.mission}</td><td>${e.duree.toFixed(2)}h</td>
+        <td style="color:var(--gray-muted);">${e.taux}€/h</td>
+        <td style="color:var(--tangerine);font-weight:500;">${e.ca.toFixed(0)}€</td>
+        <td style="color:var(--gray-muted);">${e.comment||'—'}</td>
+      </tr>`).join('')}</tbody></table></div>
+      ${entries.length>6?`<div style="font-size:11px;color:var(--gray-muted);margin-top:6px;text-align:right;">${entries.length-6} de plus — voir Impression pour le détail.</div>`:''}`:
       '<div class="empty" style="padding:10px;">Aucune imputation pour ce client.</div>'}
     </div>`;
   });
   el.innerHTML=html;
 }
 
-// ─── IMPRESSION ───
+// IMPRESSION
 function populatePrintSelect(){
   const sel=document.getElementById('print-client'),cur=sel.value;
   sel.innerHTML='<option value="">— Sélectionner —</option>';
@@ -654,12 +727,13 @@ function renderPrint(){
   if(!cid){el.innerHTML='<div class="empty">Sélectionnez un client pour générer le relevé.</div>';return;}
   const c=db.clients.find(x=>x.id==cid);
   const entries=db.entries.filter(e=>e.clientId==cid).sort((a,b)=>a.date.localeCompare(b.date));
-  const hConsos=entries.reduce((s,e)=>s+e.duree,0);
+  const hC=entries.reduce((s,e)=>s+e.duree,0);
   const ca=entries.reduce((s,e)=>s+e.ca,0);
-  const pct=c.objectif>0?(hConsos/c.objectif*100):0;
+  const pct=c.objectif>0?(hC/c.objectif*100):0;
   const typeLabel={forfait:'Forfait heures fixe',mensuel:'Forfait mensuel récurrent',regie:'Régie libre'};
   const today=new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
-  el.innerHTML=`<div style="background:#fff;border:0.5px solid var(--border);border-radius:var(--radius);padding:30px 34px;max-width:720px;margin:0 auto;">
+  const mStr=(c.missions||[]).map(m=>typeof m==='string'?m:`${m.nom} (${m.taux}€/h)`).join(' · ');
+  el.innerHTML=`<div style="background:#fff;border:0.5px solid var(--border);border-radius:var(--radius);padding:30px 34px;max-width:800px;margin:0 auto;">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;">
       <div>
         <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--navy);">RG Cap <span style="color:var(--tangerine);">Entreprises</span></div>
@@ -667,29 +741,24 @@ function renderPrint(){
       </div>
       <div style="text-align:right;font-size:12px;color:var(--gray-muted);">
         <div style="font-weight:500;color:var(--text);">Relevé de temps</div>
-        <div>${today}</div>
-        ${periode?`<div>${periode}</div>`:''}
+        <div>${today}</div>${periode?`<div>${periode}</div>`:''}
       </div>
     </div>
     <div class="separator"></div>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-      <div>
-        <div style="font-size:16px;font-weight:500;">${c.nom}</div>
-        <div style="font-size:12px;color:var(--gray-muted);margin-top:2px;">${typeLabel[c.type]}${c.periode?' · '+c.periode:''}</div>
-      </div>
-      <div style="font-size:12px;color:var(--gray-muted);">Taux horaire : <strong style="color:var(--text);">${c.taux} €/h</strong></div>
+    <div style="margin-bottom:16px;">
+      <div style="font-size:16px;font-weight:500;">${c.nom}</div>
+      <div style="font-size:12px;color:var(--gray-muted);margin-top:2px;">${typeLabel[c.type]}${c.periode?' · '+c.periode:''}</div>
+      <div style="font-size:11px;color:var(--gray-muted);margin-top:4px;">Missions : ${mStr}</div>
     </div>
     <div style="background:var(--bg);border-radius:8px;padding:16px 20px;margin-bottom:18px;">
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:${c.objectif>0?'14px':'0'};">
         <div><div style="font-size:11px;color:var(--gray-muted);margin-bottom:3px;">Objectif contractuel</div><div style="font-size:20px;font-weight:500;color:var(--navy);">${c.objectif}h</div></div>
-        <div><div style="font-size:11px;color:var(--gray-muted);margin-bottom:3px;">Heures consommées</div><div style="font-size:20px;font-weight:500;color:var(--navy);">${hConsos.toFixed(2)}h</div></div>
-        <div><div style="font-size:11px;color:var(--gray-muted);margin-bottom:3px;">Heures restantes</div><div style="font-size:20px;font-weight:500;color:var(--navy);">${Math.max(0,c.objectif-hConsos).toFixed(2)}h</div></div>
+        <div><div style="font-size:11px;color:var(--gray-muted);margin-bottom:3px;">Heures consommées</div><div style="font-size:20px;font-weight:500;color:var(--navy);">${hC.toFixed(2)}h</div></div>
+        <div><div style="font-size:11px;color:var(--gray-muted);margin-bottom:3px;">Heures restantes</div><div style="font-size:20px;font-weight:500;color:var(--navy);">${Math.max(0,c.objectif-hC).toFixed(2)}h</div></div>
         <div><div style="font-size:11px;color:var(--gray-muted);margin-bottom:3px;">CA facturable</div><div style="font-size:20px;font-weight:500;color:var(--tangerine);">${ca.toFixed(0)} €</div></div>
       </div>
       ${c.objectif>0?`<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--gray-muted);margin-bottom:5px;">
-        <span>Consommation : ${pct.toFixed(1)}%</span>
-        <span>CA total contrat : ${(c.objectif*c.taux).toFixed(0)} €</span>
-      </div>
+        <span>Consommation : ${pct.toFixed(1)}%</span></div>
       <div style="background:rgba(13,31,60,0.12);border-radius:20px;height:8px;overflow:hidden;">
         <div style="height:100%;border-radius:20px;width:${Math.min(pct,100).toFixed(1)}%;background:${pct<75?'#F07030':pct<100?'#ef9f27':'#e24b4a'};"></div>
       </div>`:''}
@@ -697,9 +766,7 @@ function renderPrint(){
     <div class="separator"></div>
     <div style="font-size:11px;font-weight:500;color:var(--navy);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.07em;">Détail des interventions</div>
     ${entries.length?`<table style="width:100%;border-collapse:collapse;font-size:12px;">
-      <thead><tr>
-        ${['Date','Mission','Commentaire','Taux','Durée','CA'].map(h=>`<th style="text-align:${['Taux','Durée','CA'].includes(h)?'right':'left'};padding:6px 8px;border-bottom:0.5px solid var(--border);color:var(--gray-muted);font-weight:500;">${h}</th>`).join('')}
-      </tr></thead>
+      <thead><tr>${['Date','Mission','Commentaire','Taux','Durée','CA'].map(h=>`<th style="text-align:${['Taux','Durée','CA'].includes(h)?'right':'left'};padding:6px 8px;border-bottom:0.5px solid var(--border);color:var(--gray-muted);font-weight:500;">${h}</th>`).join('')}</tr></thead>
       <tbody>${entries.map(e=>`<tr>
         <td style="padding:6px 8px;border-bottom:0.5px solid var(--border);white-space:nowrap;">${fmtDate(e.date)}</td>
         <td style="padding:6px 8px;border-bottom:0.5px solid var(--border);">${e.mission}</td>
@@ -710,7 +777,7 @@ function renderPrint(){
       </tr>`).join('')}</tbody>
       <tfoot><tr>
         <td colspan="4" style="padding:9px 8px;font-weight:500;border-top:1px solid var(--border);">Total</td>
-        <td style="padding:9px 8px;font-weight:500;text-align:right;border-top:1px solid var(--border);">${hConsos.toFixed(2)}h</td>
+        <td style="padding:9px 8px;font-weight:500;text-align:right;border-top:1px solid var(--border);">${hC.toFixed(2)}h</td>
         <td style="padding:9px 8px;font-weight:500;text-align:right;border-top:1px solid var(--border);color:var(--tangerine);">${ca.toFixed(0)} €</td>
       </tr></tfoot>
     </table>`:'<div class="empty">Aucune imputation enregistrée pour ce client.</div>'}
@@ -720,12 +787,11 @@ function renderPrint(){
   </div>`;
 }
 
-// ─── IMPORT / EXPORT ───
+// IMPORT / EXPORT
 function exportJSON(){
   const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download=`rgce_tracker_${new Date().toISOString().split('T')[0]}.json`;
-  a.click();
+  a.download=`rgce_tracker_${new Date().toISOString().split('T')[0]}.json`;a.click();
 }
 function importJSON(ev){
   const f=ev.target.files[0];if(!f)return;
@@ -733,20 +799,21 @@ function importJSON(ev){
   r.onload=e=>{
     try{
       db=JSON.parse(e.target.result);saveDB();
-      renderClients();renderTotaux();populateSaisieSelects();
+      renderClients();renderTotaux();populateSaisieSelects();renderRecent();
       alert('Import réussi — '+db.clients.length+' client(s), '+db.entries.length+' imputation(s).');
     }catch{alert('Fichier JSON invalide.');}
   };
-  r.readAsText(f);
+  r.readAsText(f);ev.target.value='';
 }
 
-// ─── UTILS ───
 function fmtDate(d){if(!d)return'—';const[y,m,j]=d.split('-');return`${j}/${m}/${y}`;}
 
-// ─── INIT ───
+// INIT
 loadDB();
 document.getElementById('s-date').value=new Date().toISOString().split('T')[0];
+addMissionRow('c-missions-list');
 populateSaisieSelects();renderRecent();renderTotaux();
+document.getElementById('bottom-info').textContent=db.clients.length+' client(s) · '+db.entries.length+' imputation(s)';
 </script>
 </body>
 </html>
