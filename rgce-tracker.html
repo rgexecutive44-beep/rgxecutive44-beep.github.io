@@ -80,23 +80,6 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
 .totaux-item{text-align:center;}
 .totaux-label{font-size:11px;color:var(--gray-muted);margin-bottom:3px;}
 .totaux-value{font-size:20px;font-weight:500;color:var(--navy);}
-/* URSSAF - Colonne tableau */
-.entries-table .td-urssaf{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
-.urssaf-amount{font-weight:500;color:var(--navy);font-size:13px;display:block;}
-.urssaf-badge{display:inline-block;font-size:10px;font-weight:500;padding:1px 6px;border-radius:10px;margin-top:2px;letter-spacing:0.2px;}
-.urssaf-badge--acre{background:#E8F5EF;color:#1D9E75;}
-.urssaf-badge--full{background:#FCE9DD;color:var(--tangerine);}
-/* URSSAF - Carte dashboard */
-.card-urssaf{background:var(--navy);color:#fff;border-radius:var(--radius);padding:16px 20px;border-left:4px solid var(--tangerine);margin-top:18px;}
-.card-urssaf__header{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
-.card-urssaf__label{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-muted);font-weight:500;}
-.card-urssaf__badge{font-size:10px;background:#1D9E75;color:#fff;padding:2px 9px;border-radius:20px;font-weight:500;letter-spacing:0.2px;}
-.card-urssaf__badge--alert{background:var(--tangerine);}
-.card-urssaf__total{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--tangerine-light);line-height:1;margin:6px 0 10px;}
-.card-urssaf__detail{font-size:12px;color:rgba(255,255,255,0.7);border-top:0.5px solid var(--navy-mid);padding-top:8px;}
-.card-urssaf__line{display:flex;justify-content:space-between;padding:3px 0;}
-.card-urssaf__line span:last-child{font-variant-numeric:tabular-nums;font-weight:500;color:#fff;}
-.card-urssaf__footer{font-size:11px;color:var(--gray-muted);font-style:italic;border-top:0.5px solid var(--navy-mid);padding-top:8px;margin-top:8px;}
 /* BADGES */
 .badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:500;}
 .badge-forfait{background:#E6F1FB;color:#0C447C;}
@@ -221,7 +204,7 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
   <div class="section-title">Dernières imputations</div>
   <div style="overflow-x:auto;">
     <table class="entries-table">
-      <thead><tr><th>Date</th><th>Client</th><th>Mission</th><th>Durée</th><th>Taux</th><th>CA</th><th>URSSAF</th><th>Note</th><th style="min-width:90px;"></th></tr></thead>
+      <thead><tr><th>Date</th><th>Client</th><th>Mission</th><th>Durée</th><th>Taux</th><th>CA</th><th>Note</th><th style="min-width:90px;"></th></tr></thead>
       <tbody id="recent-entries"></tbody>
     </table>
   </div>
@@ -230,18 +213,6 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
     <div class="totaux-item"><div class="totaux-label">CA total facturable</div><div class="totaux-value" id="tot-ca">0 €</div></div>
     <div class="totaux-item"><div class="totaux-label">Imputations</div><div class="totaux-value" id="tot-n">0</div></div>
     <div class="totaux-item"><div class="totaux-label">Clients actifs</div><div class="totaux-value" id="tot-clients">0</div></div>
-  </div>
-  <div class="card-urssaf">
-    <div class="card-urssaf__header">
-      <span class="card-urssaf__label">URSSAF à provisionner</span>
-      <span class="card-urssaf__badge" id="urssaf-period-badge">ACRE en cours</span>
-    </div>
-    <div class="card-urssaf__total" id="urssaf-total">0,00 €</div>
-    <div class="card-urssaf__detail">
-      <div class="card-urssaf__line"><span>Période ACRE (10,9 %)</span><span id="urssaf-acre">0,00 €</span></div>
-      <div class="card-urssaf__line"><span>Période taux plein (21,5 %)</span><span id="urssaf-full">0,00 €</span></div>
-    </div>
-    <div class="card-urssaf__footer" id="urssaf-footer">—</div>
   </div>
 </div>
 
@@ -279,9 +250,21 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
 <!-- SUIVI -->
 <div id="panel-suivi" class="panel">
   <div class="section-title">Tableau de bord</div>
-  <div class="row" style="margin-bottom:8px;">
-    <div class="col" style="flex:0 0 220px;"><label>Filtrer par client</label>
+  <div class="row" style="margin-bottom:16px;align-items:flex-end;gap:10px;">
+    <div class="col" style="flex:0 0 200px;">
+      <label>Client</label>
       <select id="filter-client" onchange="renderSuivi()"><option value="">Tous les clients</option></select>
+    </div>
+    <div class="col" style="flex:0 0 160px;">
+      <label>Année</label>
+      <select id="filter-year" onchange="updateMonthFilter();renderSuivi()"><option value="">Toutes</option></select>
+    </div>
+    <div class="col" style="flex:0 0 160px;">
+      <label>Mois</label>
+      <select id="filter-month" onchange="renderSuivi()"><option value="">Tous</option></select>
+    </div>
+    <div class="col" style="flex:0 0 auto;">
+      <button class="btn btn-secondary" onclick="resetSuiviFilters()">Réinitialiser</button>
     </div>
   </div>
   <div id="suivi-content"></div>
@@ -387,55 +370,6 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
 let timerInterval=null,timerSeconds=0,timerRunning=false;
 let db={clients:[],entries:[]};
 let editClientId=null,editEntryId=null;
-
-// ========== Module URSSAF (BIC services · SSI · CMA · Romain Guyon) ==========
-const URSSAF_CONFIG={
-  ACRE_START:'2026-04-10',
-  ACRE_END:'2027-03-31',
-  RATE_ACRE:{cotisations:10.6,cfp:0.3,total:10.9},
-  RATE_FULL:{cotisations:21.2,cfp:0.3,total:21.5}
-};
-function getUrssafRate(date){
-  return date<=URSSAF_CONFIG.ACRE_END?URSSAF_CONFIG.RATE_ACRE.total:URSSAF_CONFIG.RATE_FULL.total;
-}
-function getUrssafStatus(date){
-  return date<=URSSAF_CONFIG.ACRE_END?'acre':'full';
-}
-function computeUrssafProvision(ca,date){
-  return Math.round(ca*getUrssafRate(date))/100;
-}
-function fmtEuro(n){
-  return n.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
-}
-function computeUrssafTotals(entries){
-  const r={totalAcre:0,totalFull:0,totalGlobal:0,countAcre:0,countFull:0,caAcre:0,caFull:0};
-  entries.forEach(e=>{
-    const p=computeUrssafProvision(e.ca,e.date);
-    if(getUrssafStatus(e.date)==='acre'){r.totalAcre+=p;r.caAcre+=e.ca;r.countAcre++;}
-    else{r.totalFull+=p;r.caFull+=e.ca;r.countFull++;}
-  });
-  r.totalGlobal=r.totalAcre+r.totalFull;
-  return r;
-}
-function renderUrssaf(){
-  const t=computeUrssafTotals(db.entries);
-  document.getElementById('urssaf-total').textContent=fmtEuro(t.totalGlobal);
-  document.getElementById('urssaf-acre').textContent=fmtEuro(t.totalAcre);
-  document.getElementById('urssaf-full').textContent=fmtEuro(t.totalFull);
-  const today=new Date().toISOString().slice(0,10);
-  const inAcre=today<=URSSAF_CONFIG.ACRE_END;
-  const badge=document.getElementById('urssaf-period-badge');
-  if(inAcre){badge.textContent='ACRE en cours';badge.classList.remove('card-urssaf__badge--alert');}
-  else{badge.textContent='Taux plein';badge.classList.add('card-urssaf__badge--alert');}
-  const footer=document.getElementById('urssaf-footer');
-  const totalCount=t.countAcre+t.countFull;
-  const daysToEnd=Math.ceil((new Date(URSSAF_CONFIG.ACRE_END)-new Date(today))/(1000*60*60*24));
-  let txt=totalCount?`${totalCount} imputation${totalCount>1?'s':''} comptabilisée${totalCount>1?'s':''}`:'Aucune imputation';
-  if(inAcre&&daysToEnd>0&&daysToEnd<=90)txt+=` · ⚠ Fin ACRE dans ${daysToEnd} j`;
-  else if(inAcre&&daysToEnd>90&&daysToEnd<=180)txt+=` · Fin ACRE dans ${daysToEnd} j`;
-  footer.textContent=txt;
-}
-// ========== Fin module URSSAF ==========
 
 function loadDB(){try{const s=localStorage.getItem('rgce_tracker');if(s)db=JSON.parse(s);}catch(e){}}
 function saveDB(){
@@ -572,23 +506,18 @@ function deleteEntry(id){
 function renderRecent(){
   const tb=document.getElementById('recent-entries');
   const recent=[...db.entries].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,10);
-  if(!recent.length){tb.innerHTML='<tr><td colspan="9" class="empty">Aucune imputation enregistrée.</td></tr>';return;}
-  tb.innerHTML=recent.map(e=>{
-    const prov=computeUrssafProvision(e.ca,e.date);
-    const st=getUrssafStatus(e.date);
-    const badge=st==='acre'?'<span class="urssaf-badge urssaf-badge--acre">ACRE 10,9%</span>':'<span class="urssaf-badge urssaf-badge--full">21,5%</span>';
-    return `<tr>
+  if(!recent.length){tb.innerHTML='<tr><td colspan="8" class="empty">Aucune imputation enregistrée.</td></tr>';return;}
+  tb.innerHTML=recent.map(e=>`<tr>
     <td>${fmtDate(e.date)}</td><td>${e.clientNom}</td><td>${e.mission}</td>
     <td><strong>${e.duree.toFixed(2)}h</strong></td>
     <td style="color:var(--gray-muted);">${e.taux}€/h</td>
     <td><strong style="color:var(--tangerine);">${e.ca.toFixed(0)}€</strong></td>
-    <td class="td-urssaf"><span class="urssaf-amount">${fmtEuro(prov)}</span><br>${badge}</td>
     <td style="color:var(--gray-muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;">${e.comment||'—'}</td>
     <td style="white-space:nowrap;">
       <button class="edit-btn" onclick="openEditEntry(${e.id})" style="margin-right:4px;">✎</button>
       <button class="btn btn-danger" onclick="deleteEntry(${e.id})">✕</button>
     </td>
-  </tr>`;}).join('');
+  </tr>`).join('');
 }
 function renderTotaux(){
   const totH=db.entries.reduce((s,e)=>s+e.duree,0);
@@ -597,7 +526,6 @@ function renderTotaux(){
   document.getElementById('tot-ca').textContent=totCA.toFixed(0)+' €';
   document.getElementById('tot-n').textContent=db.entries.length;
   document.getElementById('tot-clients').textContent=db.clients.length;
-  renderUrssaf();
 }
 
 // CLIENTS
@@ -745,55 +673,159 @@ function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');editClientId=null;editEntryId=null;}
 
 // SUIVI
-function renderSuivi(){
-  const fc=document.getElementById('filter-client'),fSel=fc.value;
+function getFilteredEntries(){
+  const fClient=document.getElementById('filter-client').value;
+  const fYear=document.getElementById('filter-year').value;
+  const fMonth=document.getElementById('filter-month').value;
+  return db.entries.filter(e=>{
+    if(fClient&&e.clientId!=fClient)return false;
+    if(fYear&&!e.date.startsWith(fYear))return false;
+    if(fMonth&&e.date.slice(0,7)!==fYear+'-'+fMonth)return false;
+    return true;
+  });
+}
+function populateSuiviFilters(){
+  // Clients
+  const fc=document.getElementById('filter-client'),fCSel=fc.value;
   fc.innerHTML='<option value="">Tous les clients</option>';
   db.clients.forEach(c=>fc.innerHTML+=`<option value="${c.id}">${c.nom}</option>`);
-  fc.value=fSel;
+  fc.value=fCSel;
+  // Années (depuis les imputations)
+  const fy=document.getElementById('filter-year'),fYSel=fy.value;
+  const years=[...new Set(db.entries.map(e=>e.date.slice(0,4)))].sort((a,b)=>b-a);
+  fy.innerHTML='<option value="">Toutes</option>';
+  years.forEach(y=>fy.innerHTML+=`<option value="${y}"${y===fYSel?' selected':''}>${y}</option>`);
+  updateMonthFilter();
+}
+function updateMonthFilter(){
+  const fYear=document.getElementById('filter-year').value;
+  const fm=document.getElementById('filter-month'),fMSel=fm.value;
+  const MOIS=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  fm.innerHTML='<option value="">Tous</option>';
+  if(!fYear){fm.value='';return;}
+  const months=[...new Set(db.entries.filter(e=>e.date.startsWith(fYear)).map(e=>e.date.slice(5,7)))].sort();
+  months.forEach(m=>fm.innerHTML+=`<option value="${m}"${m===fMSel?' selected':''}>${MOIS[parseInt(m)-1]}</option>`);
+  if(months.includes(fMSel))fm.value=fMSel; else fm.value='';
+}
+function resetSuiviFilters(){
+  document.getElementById('filter-client').value='';
+  document.getElementById('filter-year').value='';
+  document.getElementById('filter-month').innerHTML='<option value="">Tous</option>';
+  renderSuivi();
+}
+function renderSuivi(){
+  populateSuiviFilters();
+  const fClient=document.getElementById('filter-client').value;
+  const fYear=document.getElementById('filter-year').value;
+  const fMonth=document.getElementById('filter-month').value;
   const el=document.getElementById('suivi-content');
-  const clients=fSel?db.clients.filter(c=>c.id==fSel):db.clients;
-  if(!clients.length){el.innerHTML='<div class="empty">Aucun client. Créez-en un dans l\'onglet Clients.</div>';return;}
-  const tH=db.entries.reduce((s,e)=>s+e.duree,0);
-  const tCA=db.entries.reduce((s,e)=>s+e.ca,0);
-  let html=`<div class="summary-grid">
-    <div class="metric-card"><div class="metric-label">Total heures</div><div class="metric-value">${tH.toFixed(1)}h</div></div>
-    <div class="metric-card"><div class="metric-label">CA facturable total</div><div class="metric-value">${tCA.toFixed(0)}€</div></div>
-    <div class="metric-card"><div class="metric-label">Clients actifs</div><div class="metric-value">${db.clients.length}</div></div>
-    <div class="metric-card"><div class="metric-label">Imputations</div><div class="metric-value">${db.entries.length}</div></div>
+
+  const filteredEntries=getFilteredEntries();
+
+  // Libellé période active
+  const MOIS=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  let periodeLabel='';
+  if(fYear&&fMonth) periodeLabel=`${MOIS[parseInt(fMonth)-1]} ${fYear}`;
+  else if(fYear) periodeLabel=`Année ${fYear}`;
+  else periodeLabel='Toutes périodes';
+
+  const tH=filteredEntries.reduce((s,e)=>s+e.duree,0);
+  const tCA=filteredEntries.reduce((s,e)=>s+e.ca,0);
+  const nbClients=fClient?1:[...new Set(filteredEntries.map(e=>e.clientId))].length;
+
+  let html=`
+  <div style="font-size:12px;color:var(--gray-muted);margin-bottom:12px;">
+    Période affichée : <strong style="color:var(--navy);">${periodeLabel}</strong>
+    ${fClient?' · Client : <strong style="color:var(--navy);">'+db.clients.find(c=>c.id==fClient)?.nom+'</strong>':''}
+  </div>
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Heures (période)</div><div class="metric-value">${tH.toFixed(1)}h</div></div>
+    <div class="metric-card"><div class="metric-label">CA facturable (période)</div><div class="metric-value">${tCA.toFixed(0)}€</div></div>
+    <div class="metric-card"><div class="metric-label">Clients</div><div class="metric-value">${nbClients}</div></div>
+    <div class="metric-card"><div class="metric-label">Imputations</div><div class="metric-value">${filteredEntries.length}</div></div>
   </div>`;
-  clients.forEach(c=>{
-    const entries=db.entries.filter(e=>e.clientId==c.id).sort((a,b)=>b.date.localeCompare(a.date));
-    const hC=entries.reduce((s,e)=>s+e.duree,0);
-    const ca=entries.reduce((s,e)=>s+e.ca,0);
-    const pct=c.objectif>0?Math.min((hC/c.objectif)*100,100):0;
-    const fillClass=pct<75?'fill-ok':pct<100?'fill-warn':'fill-over';
-    html+=`<div class="client-card" style="margin-bottom:14px;">
-      <div class="client-card-head" style="margin-bottom:10px;">
-        <div class="avatar">${c.nom.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()}</div>
-        <div><div class="client-name">${c.nom}</div><div class="client-sub">${c.periode||''}</div></div>
-        <div style="margin-left:auto;text-align:right;font-size:13px;">
-          <div style="font-weight:500;color:var(--navy);">${hC.toFixed(2)}h / ${c.objectif}h</div>
-          <div style="font-weight:500;color:var(--tangerine);">${ca.toFixed(0)}€ CA</div>
+
+  // Vue par mois si on affiche une année complète (pas de filtre mois)
+  if(fYear&&!fMonth){
+    html+=`<div class="section-title" style="margin-top:8px;">Répartition mensuelle — ${fYear}</div>`;
+    const MOIS_SHORT=['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+    const byMonth=[];
+    for(let m=1;m<=12;m++){
+      const mStr=String(m).padStart(2,'0');
+      const mEntries=filteredEntries.filter(e=>e.date.slice(5,7)===mStr);
+      if(mEntries.length){
+        byMonth.push({mois:MOIS_SHORT[m-1],num:mStr,h:mEntries.reduce((s,e)=>s+e.duree,0),ca:mEntries.reduce((s,e)=>s+e.ca,0),n:mEntries.length});
+      }
+    }
+    if(byMonth.length){
+      const maxH=Math.max(...byMonth.map(m=>m.h));
+      html+=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:20px;">`;
+      byMonth.forEach(m=>{
+        const pct=maxH>0?(m.h/maxH*100):0;
+        html+=`<div style="background:var(--bg);border-radius:8px;padding:12px 14px;cursor:pointer;" onclick="document.getElementById('filter-month').value='${m.num}';renderSuivi()">
+          <div style="font-size:12px;font-weight:500;color:var(--navy);margin-bottom:6px;">${m.mois}</div>
+          <div style="background:rgba(13,31,60,0.1);border-radius:4px;height:4px;margin-bottom:8px;overflow:hidden;">
+            <div style="height:100%;background:var(--tangerine);width:${pct.toFixed(0)}%;border-radius:4px;"></div>
+          </div>
+          <div style="font-size:13px;font-weight:500;">${m.h.toFixed(1)}h</div>
+          <div style="font-size:11px;color:var(--tangerine);font-weight:500;">${m.ca.toFixed(0)}€</div>
+          <div style="font-size:11px;color:var(--gray-muted);">${m.n} imput.</div>
+        </div>`;
+      });
+      html+=`</div>`;
+    } else {
+      html+=`<div class="empty">Aucune imputation pour cette année.</div>`;
+    }
+  }
+
+  // Détail par client
+  const clientIds=fClient?[fClient]:[...new Set(filteredEntries.map(e=>e.clientId))];
+  const clientsToShow=db.clients.filter(c=>clientIds.includes(String(c.id))||clientIds.includes(c.id));
+
+  if(!clientsToShow.length&&!filteredEntries.length){
+    el.innerHTML=html+'<div class="empty">Aucune imputation pour cette sélection.</div>';return;
+  }
+
+  if(clientsToShow.length){
+    html+=`<div class="section-title" style="margin-top:8px;">Détail par client</div>`;
+    clientsToShow.forEach(c=>{
+      const entries=filteredEntries.filter(e=>e.clientId==c.id).sort((a,b)=>b.date.localeCompare(a.date));
+      if(!entries.length)return;
+      const hC=entries.reduce((s,e)=>s+e.duree,0);
+      const ca=entries.reduce((s,e)=>s+e.ca,0);
+      // Progress sur objectif total (toutes périodes)
+      const allEntries=db.entries.filter(e=>e.clientId==c.id);
+      const hTotal=allEntries.reduce((s,e)=>s+e.duree,0);
+      const pct=c.objectif>0?Math.min((hTotal/c.objectif)*100,100):0;
+      const fillClass=pct<75?'fill-ok':pct<100?'fill-warn':'fill-over';
+      html+=`<div class="client-card" style="margin-bottom:14px;">
+        <div class="client-card-head" style="margin-bottom:10px;">
+          <div class="avatar">${c.nom.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()}</div>
+          <div><div class="client-name">${c.nom}</div><div class="client-sub">${c.periode||''}</div></div>
+          <div style="margin-left:auto;text-align:right;font-size:13px;">
+            <div style="font-weight:500;color:var(--navy);">${hC.toFixed(2)}h <span style="font-weight:300;font-size:11px;color:var(--gray-muted);">(période)</span></div>
+            <div style="font-weight:500;color:var(--tangerine);">${ca.toFixed(0)}€ CA</div>
+            ${c.objectif>0?`<div style="font-size:11px;color:var(--gray-muted);">Total contrat : ${hTotal.toFixed(1)}h / ${c.objectif}h</div>`:''}
+          </div>
         </div>
-      </div>
-      ${c.objectif>0?`<div style="margin-bottom:12px;">
-        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--gray-muted);margin-bottom:4px;">
-          <span>${pct.toFixed(0)}% consommé</span><span>Reste : ${Math.max(0,c.objectif-hC).toFixed(2)}h</span>
-        </div>
-        <div class="progress-bar-bg"><div class="progress-bar-fill ${fillClass}" style="width:${pct}%"></div></div>
-      </div>`:''}
-      ${entries.length?`<div style="overflow-x:auto;"><table class="entries-table"><thead><tr>
-        <th>Date</th><th>Mission</th><th>Durée</th><th>Taux</th><th>CA</th><th>Note</th>
-      </tr></thead><tbody>${entries.slice(0,6).map(e=>`<tr>
-        <td>${fmtDate(e.date)}</td><td>${e.mission}</td><td>${e.duree.toFixed(2)}h</td>
-        <td style="color:var(--gray-muted);">${e.taux}€/h</td>
-        <td style="color:var(--tangerine);font-weight:500;">${e.ca.toFixed(0)}€</td>
-        <td style="color:var(--gray-muted);">${e.comment||'—'}</td>
-      </tr>`).join('')}</tbody></table></div>
-      ${entries.length>6?`<div style="font-size:11px;color:var(--gray-muted);margin-top:6px;text-align:right;">${entries.length-6} de plus — voir Impression pour le détail.</div>`:''}`:
-      '<div class="empty" style="padding:10px;">Aucune imputation pour ce client.</div>'}
-    </div>`;
-  });
+        ${c.objectif>0?`<div style="margin-bottom:12px;">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--gray-muted);margin-bottom:4px;">
+            <span>Contrat global : ${pct.toFixed(0)}%</span><span>Reste : ${Math.max(0,c.objectif-hTotal).toFixed(2)}h</span>
+          </div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill ${fillClass}" style="width:${pct}%"></div></div>
+        </div>`:''}
+        <div style="overflow-x:auto;"><table class="entries-table"><thead><tr>
+          <th>Date</th><th>Mission</th><th>Durée</th><th>Taux</th><th>CA</th><th>Note</th>
+        </tr></thead><tbody>${entries.slice(0,8).map(e=>`<tr>
+          <td>${fmtDate(e.date)}</td><td>${e.mission}</td><td>${e.duree.toFixed(2)}h</td>
+          <td style="color:var(--gray-muted);">${e.taux}€/h</td>
+          <td style="color:var(--tangerine);font-weight:500;">${e.ca.toFixed(0)}€</td>
+          <td style="color:var(--gray-muted);">${e.comment||'—'}</td>
+        </tr>`).join('')}</tbody></table></div>
+        ${entries.length>8?`<div style="font-size:11px;color:var(--gray-muted);margin-top:6px;text-align:right;">${entries.length-8} de plus — voir Impression pour le détail.</div>`:''}
+      </div>`;
+    });
+  }
   el.innerHTML=html;
 }
 
