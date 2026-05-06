@@ -283,6 +283,21 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--tangerine);outli
     <div class="col" style="flex:0 0 220px;"><label>Filtrer par client</label>
       <select id="filter-client" onchange="renderSuivi()"><option value="">Tous les clients</option></select>
     </div>
+    <div class="col" style="flex:0 0 140px;"><label>Année</label>
+      <select id="filter-year" onchange="renderSuivi()"><option value="">Toutes</option></select>
+    </div>
+    <div class="col" style="flex:0 0 160px;"><label>Mois</label>
+      <select id="filter-month" onchange="renderSuivi()">
+        <option value="">Tous</option>
+        <option value="01">Janvier</option><option value="02">Février</option><option value="03">Mars</option>
+        <option value="04">Avril</option><option value="05">Mai</option><option value="06">Juin</option>
+        <option value="07">Juillet</option><option value="08">Août</option><option value="09">Septembre</option>
+        <option value="10">Octobre</option><option value="11">Novembre</option><option value="12">Décembre</option>
+      </select>
+    </div>
+    <div class="col" style="flex:0 0 auto;align-self:flex-end;">
+      <button class="btn btn-secondary" onclick="resetSuiviFilters()" style="margin-bottom:0;">Réinitialiser</button>
+    </div>
   </div>
   <div id="suivi-content"></div>
 </div>
@@ -750,19 +765,42 @@ function renderSuivi(){
   fc.innerHTML='<option value="">Tous les clients</option>';
   db.clients.forEach(c=>fc.innerHTML+=`<option value="${c.id}">${c.nom}</option>`);
   fc.value=fSel;
+  // Filtre année : peuplé dynamiquement depuis les imputations
+  const fy=document.getElementById('filter-year'),ySel=fy.value;
+  const years=[...new Set(db.entries.map(e=>e.date.slice(0,4)))].sort((a,b)=>b.localeCompare(a));
+  fy.innerHTML='<option value="">Toutes</option>';
+  years.forEach(y=>fy.innerHTML+=`<option value="${y}">${y}</option>`);
+  fy.value=ySel;
+  const mSel=document.getElementById('filter-month').value;
+  // Application des filtres date sur les imputations
+  const matchDate=e=>{
+    if(ySel&&e.date.slice(0,4)!==ySel)return false;
+    if(mSel&&e.date.slice(5,7)!==mSel)return false;
+    return true;
+  };
+  const filteredEntries=db.entries.filter(matchDate);
   const el=document.getElementById('suivi-content');
   const clients=fSel?db.clients.filter(c=>c.id==fSel):db.clients;
   if(!clients.length){el.innerHTML='<div class="empty">Aucun client. Créez-en un dans l\'onglet Clients.</div>';return;}
-  const tH=db.entries.reduce((s,e)=>s+e.duree,0);
-  const tCA=db.entries.reduce((s,e)=>s+e.ca,0);
-  let html=`<div class="summary-grid">
+  // Indication du périmètre actif
+  const labelParts=[];
+  if(ySel)labelParts.push('année '+ySel);
+  if(mSel){const mNoms=['','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];labelParts.push(mNoms[parseInt(mSel,10)]);}
+  if(fSel){const c=db.clients.find(x=>x.id==fSel);if(c)labelParts.push('client '+c.nom);}
+  const periodLabel=labelParts.length?'Filtre actif : '+labelParts.join(' · '):'Toutes périodes · tous clients';
+  // Totaux calculés sur les imputations filtrées (date)
+  const tH=filteredEntries.reduce((s,e)=>s+e.duree,0);
+  const tCA=filteredEntries.reduce((s,e)=>s+e.ca,0);
+  const activeClients=new Set(filteredEntries.map(e=>e.clientId)).size;
+  let html=`<div style="font-size:12px;color:var(--gray-muted);margin-bottom:10px;font-style:italic;">${periodLabel}</div>
+    <div class="summary-grid">
     <div class="metric-card"><div class="metric-label">Total heures</div><div class="metric-value">${tH.toFixed(1)}h</div></div>
     <div class="metric-card"><div class="metric-label">CA facturable total</div><div class="metric-value">${tCA.toFixed(0)}€</div></div>
-    <div class="metric-card"><div class="metric-label">Clients actifs</div><div class="metric-value">${db.clients.length}</div></div>
-    <div class="metric-card"><div class="metric-label">Imputations</div><div class="metric-value">${db.entries.length}</div></div>
+    <div class="metric-card"><div class="metric-label">Clients actifs</div><div class="metric-value">${activeClients}</div></div>
+    <div class="metric-card"><div class="metric-label">Imputations</div><div class="metric-value">${filteredEntries.length}</div></div>
   </div>`;
   clients.forEach(c=>{
-    const entries=db.entries.filter(e=>e.clientId==c.id).sort((a,b)=>b.date.localeCompare(a.date));
+    const entries=filteredEntries.filter(e=>e.clientId==c.id).sort((a,b)=>b.date.localeCompare(a.date));
     const hC=entries.reduce((s,e)=>s+e.duree,0);
     const ca=entries.reduce((s,e)=>s+e.ca,0);
     const pct=c.objectif>0?Math.min((hC/c.objectif)*100,100):0;
@@ -791,10 +829,16 @@ function renderSuivi(){
         <td style="color:var(--gray-muted);">${e.comment||'—'}</td>
       </tr>`).join('')}</tbody></table></div>
       ${entries.length>6?`<div style="font-size:11px;color:var(--gray-muted);margin-top:6px;text-align:right;">${entries.length-6} de plus — voir Impression pour le détail.</div>`:''}`:
-      '<div class="empty" style="padding:10px;">Aucune imputation pour ce client.</div>'}
+      '<div class="empty" style="padding:10px;">Aucune imputation sur ce périmètre.</div>'}
     </div>`;
   });
   el.innerHTML=html;
+}
+function resetSuiviFilters(){
+  document.getElementById('filter-client').value='';
+  document.getElementById('filter-year').value='';
+  document.getElementById('filter-month').value='';
+  renderSuivi();
 }
 
 // IMPRESSION
